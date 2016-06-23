@@ -1,9 +1,9 @@
-import {
-	VisibilityFilters
-} from '../actions/ToDoActions';
+import { ADD_TODO, DELETE_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from '../actionTypes/ActionTypes.js'
+import { combineReducers } from 'redux';
+const {SHOW_ALL} = VisibilityFilters;
 
 // Reducer to handle visibilityFilter action
-function visFilterReducer(state = 'SHOW_ALL', action) {
+function visibilityFilterReducer(state = 'SHOW_ALL', action) {
 	switch (action.type) {
 		case 'SET_VISBILITY_FILTER':
 			return {
@@ -41,10 +41,10 @@ function toDoReducer(state = [], action) {
 	}
 }
 
-// ToDo State Reducer
-export default function toDoApp(state = [], action) {
-	return {
-		visibilityFilter: visFilterReducer(state.visibilityFilter, action),
-		todos: toDoReducer(state.todos, action)
-	}
-}
+// Combine reducers into root reducer
+const todoApp = combineReducers({
+  visibilityFilterReducer,
+  toDoReducer
+})
+
+export default todoApp
