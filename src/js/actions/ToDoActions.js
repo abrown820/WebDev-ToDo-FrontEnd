@@ -6,7 +6,8 @@ export function addToDo(description) {
   return {
     type: types.ADD_TODO,
     id: nextToDoID++,
-    description
+    description,
+    completed: false
   };
 }
 
