@@ -1,15 +1,14 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react'
+import Footer from './Footer'
+import AddTodo from '../containers/AddTodo'
+import VisibleToDoList from '../containers/VisibleToDoList'
 
-export default class App extends Component {
-  static propTypes = {
-    children: PropTypes.element.isRequired
-  };
+const App = () => (
+  <div>
+      <AddToDo />
+      <VisibleToDoList />
+      <Footer />
+  </div>
+)
 
-  render() {
-    return (
-      <div className="page-container">
-        {this.props.children}
-      </div>
-    );
-  }
-}
+export default App
