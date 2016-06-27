@@ -31,7 +31,7 @@ const sassLoaders = [
 module.exports = {
   env : process.env.NODE_ENV,
   entry: {
-    app: path.resolve(PATHS.app, 'main.js'),
+    app: path.resolve(PATHS.app, 'index.js'),
     vendor: ['react']
   },
   output: {

@@ -1,7 +1,7 @@
 import React from 'react';
-import Todo from './Todo';
+import Todo from './Todo.js';
 
-const TodoList = ({ todos, onTodoClick }) => {
+const TodoList = ({ todos, onTodoClick }) => (
   <ul>
     {todos.map(todo =>
       <Todo key={todo.id}
@@ -10,6 +10,6 @@ const TodoList = ({ todos, onTodoClick }) => {
     />
   )}
   </ul>
-}
+)
 
 export default TodoList;
