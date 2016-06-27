@@ -20,7 +20,7 @@ export function deleteToDo(id) {
 
 export function toggleToDo(id) {
   return {
-    type: types.TOGGLE_TODO,
+    type: types.TOGGLE_COMPLETE,
     id
   };
 }

@@ -25,7 +25,7 @@ function todos(state = [], action) {
 				...state.slice(0, action.id),
 				...state.slice(action.id + 1)
 			]
-		case 'TOGGLE_TODO':
+		case 'TOGGLE_COMPLETE':
 			return state.map((todo, id) => {
 				if (id === action.id) {
 					return Object.assign({}, todo, {
