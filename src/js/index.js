@@ -5,7 +5,8 @@ import { createStore } from 'redux'
 import toDoApp from './reducers/toDoApp'
 import App from './components/App'
 
-let store = createStore(toDoApp)
+const store = createStore(toDoApp, window.devToolsExtension && window.devToolsExtension()
+    );
 
 render(
   <Provider store={store}>

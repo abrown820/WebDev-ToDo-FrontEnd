@@ -22,8 +22,8 @@ function todos(state = [], action) {
 			}]
 		case 'DELETE_TODO':
 			return [
-				...state.slice(0, action.index),
-				...state.slice(action.index + 1)
+				...state.slice(0, action.id),
+				...state.slice(action.id + 1)
 			]
 		case 'TOGGLE_TODO':
 			return state.map((todo, id) => {

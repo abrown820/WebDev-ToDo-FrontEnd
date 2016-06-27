@@ -1,13 +1,13 @@
 import React from 'react';
 import DeleteTodo from './DeleteTodo';
+import MarkComplete from './MarkComplete'
 
-const Todo = ({description, onTodoClick, onDeleteTodo, completed}) => (
+const Todo = ({description, onMarkComplete, onDeleteTodo, completed}) => (
 <div>
-  <span
-    onClick={onTodoClick}
-    style={{textDecoration: completed ? 'line-through': 'none'}}>
+  <span style={{'textDecoration': completed ? 'line-through' : 'none'}}>
     {description}
   </span>
+      <MarkComplete onClick={onMarkComplete} completed={completed}/>
       <DeleteTodo onClick={onDeleteTodo}/>
 </div>
 )
