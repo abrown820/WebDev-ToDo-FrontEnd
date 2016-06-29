@@ -5,7 +5,7 @@ const {SHOW_ALL} = VisibilityFilters;
 // Reducer to handle visibilityFilter action
 function visibilityFilter(state = 'SHOW_ALL', action) {
 	switch (action.type) {
-		case 'SET_VISBILITY_FILTER':
+		case 'SET_VISIBILITY_FILTER':
 			return action.filter
 		default:
 			return state
@@ -27,7 +27,7 @@ function todos(state = [], action) {
 			]
 		case 'TOGGLE_COMPLETE':
 			return state.map((todo, id) => {
-				if (id === action.id) {
+				if (todo.id === action.id) {
 					return Object.assign({}, todo, {
 						completed: !todo.completed
 					})
