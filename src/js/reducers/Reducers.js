@@ -1,7 +1,6 @@
 import { ADD_TODO, DELETE_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from '../actionTypes/ActionTypes.js'
 import { combineReducers } from 'redux';
 const {SHOW_ALL} = VisibilityFilters;
-import expect from 'expect';
 
 // Reducer to handle visibilityFilter action
 function visibilityFilter(state = 'SHOW_ALL', action) {
@@ -41,9 +40,9 @@ function todos(state = [], action) {
 }
 
 // Combine reducers into root reducer
-const toDoApp = combineReducers({
+const toDoAppReducer = combineReducers({
   visibilityFilter,
   todos
 })
 
-export default toDoApp
+export default toDoAppReducer

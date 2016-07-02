@@ -1,21 +1,21 @@
 import * as types from '../actionTypes/ActionTypes';
 
 // Request Todos Actions
-export function RequestToDos(todos) {
+export function requestToDos(todos) {
   return {
     type: types.REQUEST_TODOS,
     todos
   }
 }
 
-export function RequestToDosSuccess(todos) {
+export function requestToDosSuccess(todos) {
   return {
     types: types.REQUEST_TODOS_SUCCESS,
     todos
   };
 }
 
-export function RequestTodosFailure(error){
+export function requestTodosFailure(error){
   return {
     types: types.REQUEST_TODOS_FAILURE,
     error
@@ -23,7 +23,7 @@ export function RequestTodosFailure(error){
 }
 
 // Add Todo Actions
-export function AddToDo(description) {
+export function addToDo(description) {
   return {
     type: types.ADD_TODO_REQUEST,
     description,
@@ -31,14 +31,14 @@ export function AddToDo(description) {
   }
 }
 
-export function AddToDoSuccess(id){
+export function addToDoSuccess(id){
   return {
     type: types.ADD_TODO_SUCCESS,
     id
   }
 }
 
-export function AddToDoFailure(id){
+export function addToDoFailure(id){
   return {
     type: types.ADD_TODO_FAILURE,
     id
