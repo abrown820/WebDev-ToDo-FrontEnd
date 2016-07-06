@@ -1,6 +1,6 @@
 import React from 'react'
 
-const login = ({ onSubmitLogin, onSubmitReg }) => {
+const login = ({ onSubmitLogin, onSubmitReg, username, password }) => {
 
   render(){
     return(
@@ -45,9 +45,7 @@ const login = ({ onSubmitLogin, onSubmitReg }) => {
         onClick={onSubmitReg}>
         Register
       </button>
-
     </div>
-
   </form>
     )
   }
