@@ -34,6 +34,20 @@ const login = ({ onSubmitLogin, onSubmitReg }) => {
         autoCapitalize='off'
         spellCheck='false' />
     </div>
+
+    <div className='form__submit-btn-wrapper'>
+      <button className='form__submit-btn' type='submit'
+        onClick={onSubmitLogin}>
+        Login
+      </button>
+
+      <button className='form__submit-btn' type='submit'
+        onClick={onSubmitReg}>
+        Register
+      </button>
+
+    </div>
+
   </form>
     )
   }
