@@ -1,10 +1,9 @@
 import * as types from '../actionTypes/ActionTypes';
 
 // Request Todos Actions
-export function requestToDos(todos) {
+export function requestToDos() {
   return {
     type: types.REQUEST_TODOS,
-    todos
   }
 }
 
@@ -19,6 +18,13 @@ export function requestTodosFailure(error){
   return {
     types: types.REQUEST_TODOS_FAILURE,
     error
+  }
+}
+
+export function receiveTodos(todos) {
+  return {
+    type: types.RECEIVE_TODOS,
+    todos
   }
 }
 

@@ -1,3 +1,7 @@
+// Login
+export const LOGIN = 'LOGIN'
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
+export const LOGIN_FAIL = 'LOGIN_FAILURE'
 // Request Todos
 export const REQUEST_TODOS = 'REQUEST_TODOS'
 export const REQUEST_TODOS_FAILURE = 'REQUEST_TODOS_FAILURE'
