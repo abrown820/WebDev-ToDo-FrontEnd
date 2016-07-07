@@ -1,7 +1,22 @@
-import { ADD_TODO, DELETE_TODO, TOGGLE_TODO, SET_VISIBILITY_FILTER, VisibilityFilters } from '../actionTypes/ActionTypes.js'
+import * from '../actionTypes/ActionTypes.js'
 import { combineReducers } from 'redux';
 const {SHOW_ALL} = VisibilityFilters;
 
+
+// Reducer to handle username and password
+function credentials(state = [], action) {
+	switch (action.type) {
+		case 'CHANGE_FORM':
+		return [...state, {
+			account: {
+				username: action.username,
+				password: action.password
+			}
+		}];
+		default:
+		return state
+	}
+}
 // Reducer to handle visibilityFilter action
 function visibilityFilter(state = 'SHOW_ALL', action) {
 	switch (action.type) {
@@ -41,6 +56,7 @@ function todos(state = [], action) {
 
 // Combine reducers into root reducer
 const toDoAppReducer = combineReducers({
+	credentials,
   visibilityFilter,
   todos
 })

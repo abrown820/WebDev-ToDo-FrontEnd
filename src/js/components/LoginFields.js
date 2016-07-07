@@ -1,12 +1,12 @@
 import React from 'react'
 
-const login = ({ onSubmitLogin, onSubmitReg, username, password }) => {
+const login = ({ onChangeUsername, onChangePassword }) => {
 
   render(){
     return(
     <form className='form'
-      onSubmitLogin={() => onSubmitLogin(this.props.username, this.props.password)}
-      onSubmitReg={() => onSubmitReg(this.props.username, this.props.password)}
+      onChangeUsername={() => changeUsername(this.props.account.username, this.props.account.password)}
+      onChangePassword={() => changePassword(this.props.account.username, this.props.account.password)}
     >
 
       <div className='form__field-wrapper'>
@@ -14,7 +14,8 @@ const login = ({ onSubmitLogin, onSubmitReg, username, password }) => {
         <input
           className='form__field-input'
           type='text'
-          value={this.props.username}
+          onChange={onChangeUsername}
+          value={this.props.account.username}
           id='username'
           placeholder=''
           autoCorrect='off'
@@ -27,24 +28,13 @@ const login = ({ onSubmitLogin, onSubmitReg, username, password }) => {
       <input
         className='form__field-input'
         type='text'
-        value={this.props.password}
+        onChange={onChangePassword}
+        value={this.props.account.password}
         id='password'
         placeholder=''
         autoCorrect='off'
         autoCapitalize='off'
         spellCheck='false' />
-    </div>
-
-    <div className='form__submit-btn-wrapper'>
-      <button className='form__submit-btn' type='submit'
-        onClick={onSubmitLogin}>
-        Login
-      </button>
-
-      <button className='form__submit-btn' type='submit'
-        onClick={onSubmitReg}>
-        Register
-      </button>
     </div>
   </form>
     )
