@@ -2,12 +2,12 @@
 function credentials(state = {account: {username:'', password: ''}}, action) {
 	switch (action.type) {
 		case 'CHANGE_FORM':
-		return [...state, {
+		return {
 			account: {
 				username: action.username,
 				password: action.password
 			}
-		}];
+		};
 		default:
 		return state
 	}
