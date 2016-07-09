@@ -3,7 +3,7 @@ import Footer from './Footer'
 import AddToDo from '../containers/AddToDo.js'
 import VisibleToDoList from '../containers/VisibleToDoList'
 
-const App = () => (
+const TodoApp = () => (
   <div>
       <AddToDo />
       <VisibleToDoList />
@@ -11,4 +11,4 @@ const App = () => (
   </div>
 )
 
-export default App
+export default TodoApp

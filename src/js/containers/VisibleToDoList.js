@@ -15,7 +15,7 @@ const getVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = (state) => {
   return {
-    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+    VisibleTodos: getVisibleTodos(state.todos, state.visibilityFilter)
   }
 }
 
@@ -26,17 +26,17 @@ const mapDispatchToProps = (dispatch) => {
     },
     onDeleteTodo: (id) => {
       dispatch(deleteToDo(id))
+    },
+    getInitialTodos: () => {
+      dispatch(requestToDos(todos))
     }
   }
-}
-
-componentDidMount() {
-  dispatch(requestToDos(todos))
 }
 
 const VisibleTodoList = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TodoList)
+
 
 export default VisibleTodoList

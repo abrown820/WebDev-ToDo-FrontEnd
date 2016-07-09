@@ -8,19 +8,17 @@ import LoginPage from '../components/LoginPage'
     password: state.account.password
   }
 
-  const mapDispatchToProps = (dispatch, ownProps) =>{
-    onSubmitLogin: (this.ownProps.username, this.ownProps.password) => {
-      dispatch(login(this.ownProps.username, this.ownProps.password))
+  const mapDispatchToProps = (dispatch) =>{
+    onSubmitLogin: (username, password) => {
+      dispatch(login(username, password))
     },
-    onSubmitReg: (state.username, state.password) => {
-      dispatch(register(state.username, state.password))
+    onSubmitReg: (username, password) => {
+      dispatch(register(username, password))
     },
-    onChangeUsername: (this.props.username, this.props.password) => {
-      dispatch(changeUsername())
+    changeCredentials: (username, password) => {
+      dispatch(changeForm(username, password))
     }
   }
-
-}
 
 const LoginForm = connect(mapStateToProps, mapDispatchToProps)(LoginPage)
 

@@ -3,16 +3,24 @@ import LoginFields from './LoginFields'
 import LoginSubmitButtons from './LoginSubmitButtons'
 
 class LoginPage extends React.Component{
+  constructor(props){
+    super(props)
+  }
   render(){
-    const {username, password, onSubmitReg, onSubmitLogin} = this.props
+    const {username, password, changeCredentials, onSubmitReg, onSubmitLogin} = this.props
     return (
       <div>
-        <LoginFields username={username} password={password} />
-        
+        <LoginFields username={username} password={password}
+          changeCredentials={changeCredentials} />
+
         <LoginSubmitButtons
-          onSubmitLogin={() => onSubmitLogin(state.username, state.password)}
-          onSubmitReg={() => onSubmitReg(state.username, state.password)} />
+          username={username}
+          password={password}
+          onSubmitLogin={() => onSubmitLogin(username, password)}
+          onSubmitReg={() => onSubmitReg(username, password)} />
       </div>
     )
   }
 }
+
+export default LoginPage

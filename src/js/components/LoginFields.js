@@ -1,12 +1,34 @@
 import React from 'react'
 
-const login = ({ onChangeUsername, onChangePassword }) => {
+class LoginFields extends React.Component {
+  constructor(props) {
+  super(props)
+  this._changeUsername = this._changeUsername.bind(this)
+  this._changePassword = this._changePassword.bind(this)
+  this._changeCredentials = this._changeCredentials.bind(this)
+}
 
-  render(){
-    return(
+_changeUsername(event) {
+  this._changeCredentials({username: event.target.value, password: password})
+}
+
+_changePassword(event){
+  this._changeCredentials({username: username, password: event.target.value})
+}
+
+_changeCredentials(newCredentials){
+  changeCredentials(newCredentials.username, newCredentials.password)
+}
+
+render() {
+  const {username, password} = this.props
+  return(
+
     <form className='form'
-      onChangeUsername={() => changeUsername(this.props.account.username, this.props.account.password)}
-      onChangePassword={() => changePassword(this.props.account.username, this.props.account.password)}
+      onChangeUsername={() => this._changeUsername(event)}
+      onChangePassword={() => this._changePassword(event)}
+      username={username}
+      password={password}
     >
 
       <div className='form__field-wrapper'>
@@ -14,8 +36,8 @@ const login = ({ onChangeUsername, onChangePassword }) => {
         <input
           className='form__field-input'
           type='text'
-          onChange={onChangeUsername}
-          value={this.props.account.username}
+          onChange={this._changeUsername}
+          value={username}
           id='username'
           placeholder=''
           autoCorrect='off'
@@ -28,8 +50,8 @@ const login = ({ onChangeUsername, onChangePassword }) => {
       <input
         className='form__field-input'
         type='text'
-        onChange={onChangePassword}
-        value={this.props.account.password}
+        onChange={this._changePassword}
+        value={password}
         id='password'
         placeholder=''
         autoCorrect='off'
@@ -39,6 +61,11 @@ const login = ({ onChangeUsername, onChangePassword }) => {
   </form>
     )
   }
+
+
+
 }
+
+
 
 export default LoginFields
