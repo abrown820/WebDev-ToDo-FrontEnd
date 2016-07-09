@@ -1,5 +1,5 @@
 // Reducer to handle username and password
-function credentials(state = [], action) {
+function credentials(state = {account: {username:'', password: ''}}, action) {
 	switch (action.type) {
 		case 'CHANGE_FORM':
 		return [...state, {

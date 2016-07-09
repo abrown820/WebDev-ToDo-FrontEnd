@@ -28,11 +28,26 @@ export function receiveTodos(todos) {
   }
 }
 
+export function asyncaddToDo(description, importance) {
+  return function (dispatch) {
+    dispatch(addToDo(description, importance))
+    var headers = new Headers();
+    headers.append("Authorization", checkLogin)
+    var todoContent = {'taskDescription': description,'taskComplete':false, 'taskImportance': importance}
+    return fetch('https://daniel-todo-backend.herokuapp.com/tasks/', {method:"POST", headers: headers, body: todoContent,mode:'no-cors'})
+    .then(response => response.json())
+    .then(json =>
+      dispatch()
+    )
+  }
+}
+
 // Add Todo Actions
-export function addToDo(description) {
+export function addToDo(description, importance) {
   return {
     type: types.ADD_TODO_REQUEST,
     description,
+    importance,
     completed: false
   }
 }

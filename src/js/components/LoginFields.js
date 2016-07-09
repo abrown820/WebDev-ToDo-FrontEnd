@@ -8,6 +8,8 @@ class LoginFields extends React.Component {
   this._changeCredentials = this._changeCredentials.bind(this)
 }
 
+
+
 _changeUsername(event) {
   this._changeCredentials({username: event.target.value, password: password})
 }
@@ -17,7 +19,8 @@ _changePassword(event){
 }
 
 _changeCredentials(newCredentials){
-  changeCredentials(newCredentials.username, newCredentials.password)
+
+    this.props.changeCredentials(newCredentials.username, newCredentials.password)
 }
 
 render() {

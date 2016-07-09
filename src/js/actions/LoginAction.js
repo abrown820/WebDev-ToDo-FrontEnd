@@ -1,4 +1,4 @@
-import * as actions from '../actionTypes/actions'
+import * as actions from '../actionTypes/ActionTypes'
 
 export function changeForm(username, password){
   return {

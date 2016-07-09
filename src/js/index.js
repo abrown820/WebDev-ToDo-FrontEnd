@@ -4,6 +4,8 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import TodoApp from './components/TodoApp'
 import LoginPage from './components/LoginPage'
+import LoginForm from './containers/LoginForm'
+
 
 // import store, reducer and apply middleware
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux'
@@ -30,7 +32,7 @@ const store = createStore(combineReducers({toDoAppReducer,
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={LoginPage}>
+      <Route path="/" component={LoginForm}>
         <Route path="app" component={TodoApp}/>
       </Route>
     </Router>
