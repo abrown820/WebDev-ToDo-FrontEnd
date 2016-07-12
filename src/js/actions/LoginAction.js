@@ -1,5 +1,5 @@
 import * as actions from '../actionTypes/ActionTypes'
-
+import * as storage from '../actions/storageCheck'
 
 export function changeForm(username, password){
   return {
@@ -22,17 +22,21 @@ export function asyncLogin(username, password){
     dispatch(login(username, password))
     const loginInfo = {'username': username, 'password': password}
     fetch('https://daniel-todo-backend.herokuapp.com/api-token-auth/',
-    {method:'GET',
+    {method:'POST',
      dataType: 'json',
      headers: {
        'Accept': 'application/json',
        'Content-Type': 'application/json'
      },
-      body: loginInfo,
-      mode:'no-cors'
+      body: JSON.stringify(loginInfo),
+      mode:'cors'
+    })    
+    .then(response => {
+      return response.json();
+    }).then( (json) => {
+      storage.storeToken(json.token);
+      dispatch(loginSuccess());
     })
-    .then(handleErr)
-    .then(response => console.log(response))
     .catch(function(error){
       dispatch(loginFailure(error))
       console.log(error)
