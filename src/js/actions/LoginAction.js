@@ -1,5 +1,4 @@
 import * as actions from '../actionTypes/ActionTypes'
-import moment from 'moment';
 
 
 export function changeForm(username, password){
@@ -78,8 +77,12 @@ export function loginFailure(error){
 
 export function asyncRegister(username, password){
   return function(dispatch){
-    dispatch(register());
-    const regInfo = { "password": password,
+    dispatch(register(username, password));
+    const myHeaders = new Headers({
+      "Content-Type": "application/json"
+    })
+    const regInfo =
+    {"password": password,
     "is_superuser": false,
     "username": username,
     "first_name": "",
@@ -90,9 +93,10 @@ export function asyncRegister(username, password){
     "groups": []};
     fetch('https://daniel-todo-backend.herokuapp.com/users/',
     {method:'POST',
-     dataType: 'json',
-      body: regInfo,
-      mode:'no-cors'
+     dataType: 'application/json',
+     headers: myHeaders,
+      body: JSON.stringify(regInfo),
+      mode:'cors'
     })
     .then(handleErr)
     .then(response => console.log(response))
@@ -103,9 +107,11 @@ export function asyncRegister(username, password){
   }
 }
 
-export function register(){
+export function register(username, password){
   return {
     type: actions.REGISTER,
+    username,
+    password
   }
 }
 
