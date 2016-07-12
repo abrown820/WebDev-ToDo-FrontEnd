@@ -52,7 +52,7 @@ render() {
       <label for='password'> Password </label>
       <input
         className='form__field-input'
-        type='text'
+        type='password'
         onChange={this._changePassword}
         value={password}
         id='password'
