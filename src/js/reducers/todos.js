@@ -6,6 +6,7 @@ function todos(state = [], action) {
 			return [...state, {
 				id: action.id,
 				description: action.description,
+				importance: action.importance,
 				completed: false
 			}]
 		case 'DELETE_TODO_SUCCESS':
