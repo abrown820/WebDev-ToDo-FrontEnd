@@ -9,6 +9,7 @@ import LoginForm from './containers/LoginForm'
 
 // import store, reducer and apply middleware
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux'
+import thunk from 'redux-thunk';
 import toDoAppReducer from './reducers/Reducers'
 
 // import sagas and middleware
@@ -23,7 +24,7 @@ import { syncHistoryWithStore, routerReducer} from 'react-router-redux'
 // const sagaMiddleware = createSagaMiddleware()
 const store = createStore(combineReducers({toDoAppReducer,
   routing: routerReducer}),
-  compose(window.devToolsExtension ?
+  compose(applyMiddleware(thunk), window.devToolsExtension ?
   window.devToolsExtension() : f => f))
 
   const history = syncHistoryWithStore(browserHistory, store);

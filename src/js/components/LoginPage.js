@@ -7,9 +7,7 @@ class LoginPage extends React.Component{
     super(props);
   }
   render(){
-    console.log(this.props);
     const {username, password, changeCredentials, onSubmitReg, onSubmitLogin} = this.props
-    console.log(changeCredentials);
     return (
       <div>
         <LoginFields username={username} password={password}
