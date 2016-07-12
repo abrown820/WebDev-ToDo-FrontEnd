@@ -77,7 +77,7 @@ export function loginFailure(error){
 
 export function asyncRegister(username, password){
   return function(dispatch){
-    dispatch(register(username, password));
+    dispatch(register());
     const myHeaders = new Headers({
       "Content-Type": "application/json"
     })
@@ -99,7 +99,8 @@ export function asyncRegister(username, password){
       mode:'cors'
     })
     .then(handleErr)
-    .then(response => console.log(response))
+    .then(() => dispatch(registerSuccess())
+    .then((username, password) => asyncLogin(username, password))
     .catch(function(error){
       dispatch(registerFailure(error))
       console.log(error)
