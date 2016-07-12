@@ -1,4 +1,4 @@
-function logInStatus(state = {loggedIn: false, loginStatus 'NOT_ATTEMPTED'}, action) {
+function logInStatus(state = {loggedIn: false, loginStatus: 'NOT_ATTEMPTED'}, action) {
   switch(action.type) {
     case 'LOGIN':
     return {
@@ -9,7 +9,7 @@ function logInStatus(state = {loggedIn: false, loginStatus 'NOT_ATTEMPTED'}, act
     return {
       loggedIn: true,
       loginStatus: 'SUCCESFUL'
-    };
+    }
     case 'LOGIN_FAILURE':
     return {
       loggedIn: false,
