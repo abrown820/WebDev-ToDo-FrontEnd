@@ -3,17 +3,17 @@ function registerStatus(state = {registering: false, registerSuccess: 'NOT_ATTEM
     case 'REGISTER':
     return {
       registering: true,
-      registerSuccess: 'NOT_ATTEMPTED'
+      registerSuccess: 'IN_PROCESS'
     }
     case 'REGISTER_SUCCESS':
     return {
       registering: false,
-      registerSuccess: true,
+      registerSuccess: 'SUCCESFUL',
     };
     case 'REGISTER_FAILURE':
     return {
       registering: false,
-      registerSuccess: false,
+      registerSuccess: 'FAILED',
     }
     default:
     return state

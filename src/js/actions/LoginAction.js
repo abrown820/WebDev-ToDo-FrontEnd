@@ -42,7 +42,7 @@ export function asyncLogin(username, password){
       dispatch(loginSuccess());
     })
     .catch(function(error){
-      dispatch(loginFailure(error))
+      dispatch(loginFailure())
       console.log(error)
     })
   }
@@ -63,10 +63,9 @@ export function loginSuccess(){
   }
 }
 
-export function loginFailure(error){
+export function loginFailure(){
   return {
-    type: actions.LOGIN_FAIL,
-    error
+    type: actions.LOGIN_FAILURE
   }
 }
 
@@ -96,11 +95,11 @@ export function asyncRegister(username, password){
     })
     .then(handleErr)
     .then(() => dispatch(registerSuccess()))
-    .then((username, password) => dispatch(asyncLogin(username, password)))
     .catch(function(error){
-      dispatch(registerFailure(error))
+      dispatch(registerFailure())
       console.log(error)
-    })
+      })
+    .then(dispatch(asyncLogin(username, password)))
   }
 }
 
@@ -115,12 +114,12 @@ export function register(username, password){
 
 export function registerSuccess(){
   return {
-    type: actions.REGISTER_SUCCESS,
+    type: actions.REGISTER_SUCCESS
   }
 }
 
 export function registerFailure(){
   return {
-    type: actions.REGISTER_FAILURE,
+    type: actions.REGISTER_FAILURE
   }
 }

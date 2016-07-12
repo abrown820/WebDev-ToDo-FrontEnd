@@ -3,7 +3,7 @@ export const CHANGE_FORM = 'CHANGE_FORM'
 // Login
 export const LOGIN = 'LOGIN'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-export const LOGIN_FAIL = 'LOGIN_FAILURE'
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 // Register
 export const REGISTER = 'REGISTER'
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'

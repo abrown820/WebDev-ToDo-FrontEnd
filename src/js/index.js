@@ -12,10 +12,6 @@ import {createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import thunk from 'redux-thunk';
 import toDoAppReducer from './reducers/Reducers'
 
-// import sagas and middleware
-// import rootSaga from './sagas/sagas'
-// import createSagaMiddleware from 'redux-saga'
-
 // react router
 import { browserHistory, Router, Route, Link } from 'react-router';
 import { syncHistoryWithStore, routerReducer} from 'react-router-redux'
