@@ -1,9 +1,9 @@
-function registerStatus(state = {registering: false, registerSuccess: 'noAttempt'}, action) {
+function registerStatus(state = {registering: false, registerSuccess: 'NOT_ATTEMPTED'}, action) {
   switch(action.type) {
     case 'REGISTER':
     return {
       registering: true,
-      registerSuccess: 'noAttempt'
+      registerSuccess: 'NOT_ATTEMPTED'
     }
     case 'REGISTER_SUCCESS':
     return {
