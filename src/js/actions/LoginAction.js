@@ -1,6 +1,7 @@
 import * as actions from '../actionTypes/ActionTypes'
 import * as storage from '../actions/storageCheck'
 
+// handles changing login / register form changes
 export function changeForm(username, password){
   return {
     type: actions.CHANGE_FORM,
@@ -8,7 +9,7 @@ export function changeForm(username, password){
     password
   }
 }
-
+// helper function to handle errors for all async api calls.
 function handleErr(response){
   if (!response.ok){
     console.log(response);
@@ -17,6 +18,7 @@ function handleErr(response){
     return response;
   }
 
+// api call to login
 export function asyncLogin(username, password){
   return function(dispatch) {
     dispatch(login(username, password))
@@ -30,11 +32,13 @@ export function asyncLogin(username, password){
      },
       body: JSON.stringify(loginInfo),
       mode:'cors'
-    })    
+    })
+    .then(handleErr)
     .then(response => {
       return response.json();
     }).then( (json) => {
-      storage.storeToken(json.token);
+      storage.storeToken(json.token),
+      console.log(json.token),
       dispatch(loginSuccess());
     })
     .catch(function(error){
@@ -44,20 +48,7 @@ export function asyncLogin(username, password){
   }
   }
 
-// export function asyncaddToDo(description, importance) {
-//   return function (dispatch) {
-//     dispatch(addToDo(description, importance))
-//     var headers = new Headers();
-//     headers.append("Authorization", checkLogin)
-//     var todoContent = {'taskDescription': description,'taskComplete':false, 'taskImportance': importance}
-//     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/', {method:"POST", headers: headers, body: todoContent,mode:'no-cors'})
-//     .then(response => response.json())
-//     .then(json =>
-//       dispatch()
-//     )
-//   }
-
-
+// local state login update
 export function login(username, password){
   return {
     type: actions.LOGIN,
@@ -79,6 +70,7 @@ export function loginFailure(error){
   }
 }
 
+// handles registration api call
 export function asyncRegister(username, password){
   return function(dispatch){
     dispatch(register());
@@ -103,8 +95,8 @@ export function asyncRegister(username, password){
       mode:'cors'
     })
     .then(handleErr)
-    .then(() => dispatch(registerSuccess())
-    .then((username, password) => asyncLogin(username, password))
+    .then(() => dispatch(registerSuccess()))
+    .then((username, password) => dispatch(asyncLogin(username, password)))
     .catch(function(error){
       dispatch(registerFailure(error))
       console.log(error)
@@ -112,6 +104,7 @@ export function asyncRegister(username, password){
   }
 }
 
+// local update to state upon registering
 export function register(username, password){
   return {
     type: actions.REGISTER,

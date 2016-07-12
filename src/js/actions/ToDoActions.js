@@ -30,9 +30,6 @@ export function receiveTodos(todos) {
 
 export function asyncaddToDo(description, importance) {
   return function (dispatch) {
-    dispatch(addToDo(description, importance))
-    var headers = new Headers();
-    headers.append("Authorization", checkLogin)
     var todoContent = {'taskDescription': description,'taskComplete':false, 'taskImportance': importance}
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/', {method:"POST", headers: headers, body: todoContent,mode:'no-cors'})
     .then(response => response.json())
