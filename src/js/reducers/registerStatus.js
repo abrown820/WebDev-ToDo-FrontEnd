@@ -1,19 +1,19 @@
-function registerStatus(state = {registering: false, registerSuccess: 'NOT_ATTEMPTED'}, action) {
+function registerStatus(state = {registered: false, registrationStatus: 'NOT_ATTEMPTED'}, action) {
   switch(action.type) {
     case 'REGISTER':
     return {
-      registering: true,
-      registerSuccess: 'IN_PROCESS'
+      registered: false,
+      registrationStatus: 'IN_PROCESS'
     }
     case 'REGISTER_SUCCESS':
     return {
-      registering: false,
-      registerSuccess: 'SUCCESFUL',
+      registered: true,
+      registrationStatus: 'SUCCESSFUL'
     };
     case 'REGISTER_FAILURE':
     return {
-      registering: false,
-      registerSuccess: 'FAILED',
+      registered: false,
+      registrationStatus: 'FAILED'
     }
     default:
     return state
