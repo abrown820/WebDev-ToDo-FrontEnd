@@ -1,4 +1,4 @@
-function logInStatus(state = {loggedIn: false, loginStatus 'NOT_ATTEMPTED'}, action) {
+function logInStatus(state = {loggedIn: false, loginStatus: 'NOT_ATTEMPTED'}, action) {
   switch(action.type) {
     case 'LOGIN':
     return {
