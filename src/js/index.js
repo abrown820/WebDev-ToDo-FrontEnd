@@ -14,13 +14,13 @@ import toDoAppReducer from './reducers/Reducers'
 
 // react router
 import { browserHistory, Router, Route, Link } from 'react-router';
-import { syncHistoryWithStore, routerReducer} from 'react-router-redux'
+import { syncHistoryWithStore, routerReducer, push, routerMiddleware} from 'react-router-redux'
 
 // Configure saga middleware and store
 // const sagaMiddleware = createSagaMiddleware()
 const store = createStore(combineReducers({toDoAppReducer,
   routing: routerReducer}),
-  compose(applyMiddleware(thunk), window.devToolsExtension ?
+  compose(applyMiddleware(thunk,routerMiddleware(browserHistory)), window.devToolsExtension ?
   window.devToolsExtension() : f => f))
 
   const history = syncHistoryWithStore(browserHistory, store);
@@ -29,9 +29,8 @@ const store = createStore(combineReducers({toDoAppReducer,
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/" component={LoginForm}>
-        <Route path="app" component={TodoApp}/>
-      </Route>
+      <Route path="/" component={LoginForm}/>
+      <Route path="todo" component={TodoApp}/>      
     </Router>
   </Provider>,
   document.getElementById('root')
