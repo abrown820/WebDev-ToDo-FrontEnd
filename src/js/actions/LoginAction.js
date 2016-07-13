@@ -1,6 +1,7 @@
 import * as actions from '../actionTypes/ActionTypes'
 import * as storage from '../actions/storageCheck'
-
+import { push } from 'react-router-redux'
+import { browserHistory } from 'react-router'
 // handles changing login / register form changes
 export function changeForm(username, password){
   return {
@@ -22,7 +23,8 @@ function handleErr(response){
 export function asyncLogin(username, password){
   return function(dispatch) {
     dispatch(login(username, password))
-    const loginInfo = {'username': username, 'password': password}
+    console.log(username,password);
+    var loginInfo = {'username': username, 'password': password}
     fetch('https://daniel-todo-backend.herokuapp.com/api-token-auth/',
     {method:'POST',
      dataType: 'json',
@@ -37,9 +39,12 @@ export function asyncLogin(username, password){
     .then(response => {
       return response.json();
     }).then( (json) => {
-      storage.storeToken(json.token),
-      console.log(json.token),
+      storage.storeToken(json.token);     
+      
+
+    }).then( () => {
       dispatch(loginSuccess());
+      dispatch(push('/todo'))
     })
     .catch(function(error){
       dispatch(loginFailure())
@@ -99,7 +104,9 @@ export function asyncRegister(username, password){
       dispatch(registerFailure())
       console.log(error)
       })
-    .then(dispatch(asyncLogin(username, password)))
+    .then(
+      () => {dispatch(asyncLogin(username, password));}
+    )
   }
 }
 
