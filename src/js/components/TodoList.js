@@ -6,18 +6,20 @@ class TodoList extends React.Component {
     super(props);
   }
 
-  componentDidMount() {
-    this.props.getInitialTodos()
-  }
+componentDidMount(){
+  getInitialTodos()
+}
 
 render(){
 return (
   <div>
-    {VisibleTodos.map(todo =>
+    {
+      this.props.Todos == undefined ? <p>Loading...</p> :
+      VisibleTodos.map(todo =>
       <Todo key={todo.id} onMarkComplete={() => onMarkComplete(todo.id)}
         onDeleteTodo={() => onDeleteTodo(todo.id)}
-      {...todo}/>
-)}
+      {...todo}/>)
+    }
   </div>
 )}
 }
