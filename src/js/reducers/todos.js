@@ -10,13 +10,16 @@ function todos(state = [], action) {
 				completed: false
 			}]
 		case 'DELETE_TODO_SUCCESS':
-			return [
-				...state.slice(0, action.id),
-				...state.slice(action.id + 1)
-			]
+			var idLocation =0
+			state.map((task, index)=>{
+				if(task.id == action.id){
+					idLocation = index
+				}
+			})	
+			return state.slice(0, idLocation).concat(state.slice(idLocation+1))
 		case 'TOGGLE_COMPLETE_SUCCESS':
 			return state.map((todo, id) => {
-				if (id === action.id) {
+				if (todo.id === action.id) {
 					return Object.assign({}, todo, {
 						completed: !todo.completed
 					})

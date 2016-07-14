@@ -95,10 +95,24 @@ export function addToDoFailure(id){
   }
 }
 
+export function asyncdeleteToDo(id){
+  return function(dispatch) {
+    dispatch(deleteToDo(id));
+    const myHeaders = new Headers({
+      "Content-Type": "application/json",
+      "Authorization": storage.checkLogin()
+    })
+    return fetch('https://daniel-todo-backend.herokuapp.com/tasks/'+id+'/', {method:"DELETE", headers: myHeaders,mode:'cors'})
+    .then((response)=>{
+      dispatch(deleteToDoSuccess(id));
+    })
+  }
+}
+
 // Delete Todo Actions
 export function deleteToDo(id) {
   return {
-    type: types.DELETE_TODO,
+    type: types.DELETE_TODO_REQUEST,
     id
   };
 }
@@ -115,6 +129,21 @@ export function deleteToDoFailure(id){
     type: types.DELETE_TODO_FAILURE,
     id
   };
+}
+
+export function asynctoggleToDo(id, completed){
+  return function(dispatch){
+    dispatch(toggleToDo(id, completed));
+    var todoContent = {'taskCompleted':completed}
+    const myHeaders = new Headers({
+      "Content-Type": "application/json",
+      "Authorization": storage.checkLogin()
+    })
+    return fetch('https://daniel-todo-backend.herokuapp.com/tasks/'+id+'/', {method:"PATCH", headers: myHeaders, body: JSON.stringify(todoContent),mode:'cors'})
+    .then((response)=>{
+      dispatch(toggleToDoSuccess(id, completed));  
+    })
+  }
 }
 
 // Toggle Completion of Todo Actions

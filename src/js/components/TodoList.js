@@ -12,13 +12,13 @@ componentDidMount(){
 }
 
 render(){
-  const { VisibleTodos, Todos} = this.props;
+  const { VisibleTodos, Todos, onDeleteTodo, onMarkComplete} = this.props;
 return (
   <div>
     {
       Todos == undefined ? <p>Loading...</p> :
       VisibleTodos.map(todo =>
-      <Todo key={todo.id} onMarkComplete={() => onMarkComplete(todo.id)}
+      <Todo key={todo.id} onMarkComplete={() => onMarkComplete(todo.id, !todo.completed)}
         onDeleteTodo={() => onDeleteTodo(todo.id)}
       {...todo}/>)
     }
