@@ -11,6 +11,9 @@
 .task {
 	padding: 2%;
 	margin: 0.5%;
+	@media (max-width: 720px){
+		padding: 5%;
+	}
 }
 
 .buttons {
