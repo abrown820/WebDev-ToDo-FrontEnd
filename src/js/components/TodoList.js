@@ -7,14 +7,16 @@ class TodoList extends React.Component {
   }
 
 componentDidMount(){
+  const { getInitialTodos } = this.props;
   getInitialTodos()
 }
 
 render(){
+  const { VisibleTodos, Todos} = this.props;
 return (
   <div>
     {
-      this.props.Todos == undefined ? <p>Loading...</p> :
+      Todos == undefined ? <p>Loading...</p> :
       VisibleTodos.map(todo =>
       <Todo key={todo.id} onMarkComplete={() => onMarkComplete(todo.id)}
         onDeleteTodo={() => onDeleteTodo(todo.id)}

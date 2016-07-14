@@ -23,6 +23,16 @@ function todos(state = [], action) {
 				}
 				return todo
 			})
+		case 'REQUEST_TODOS_SUCCESS':
+			
+			return state.concat(action.todos.map((todo)=>{
+				return {
+					id: parseInt(todo.url.split('/')[4]),
+					description: todo.taskDescription,
+					importance: todo.taskImportance,
+					completed: todo.taskCompleted
+				}
+			}))
 		default:
 			return state
 	}

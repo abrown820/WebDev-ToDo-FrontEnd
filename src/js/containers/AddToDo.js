@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addToDo } from '../actions/ToDoActions'
+import { asyncaddToDo } from '../actions/ToDoActions'
 
 let AddToDo = ({ dispatch }) => {
   let input
@@ -12,7 +12,7 @@ let AddToDo = ({ dispatch }) => {
         if (!input.value.trim()) {
           return
         }
-        dispatch(addToDo(input.value, document.getElementById('importanceSelect').value))
+        dispatch(asyncaddToDo(input.value, document.getElementById('importanceSelect').value))
         input.value = ''
       }}>
         <input ref={node => {
