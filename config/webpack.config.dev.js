@@ -65,7 +65,8 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: sassLoaders.join('!')
+        loader: sassLoaders.join('!'),
+        include: PATHS.styles
       },
       {
         test: /\.css$/,
