@@ -1,22 +1,20 @@
 import React from 'react';
 import DeleteTodo from './DeleteTodo';
 import MarkComplete from './MarkComplete'
-import importanceConverter from '../actions/importance'
+import importanceColour from '../actions/importance'
 
-const Todo = ({description, onMarkComplete, onDeleteTodo, completed, importance}) => (
-<div>
+const Todo = ({description, onMarkComplete, onDeleteTodo, completed, id, importance}) => (
+<div className="task" style={{'backgroundColor': importanceColour(id, importance)}}>
   <span style={{'textDecoration': completed ? 'line-through' : 'none'}}>
-  	<div class="description">
+  
     {description}
-    </div>
-    <div class="importance">
-    {
-    	importanceConverter(importance)
-    }
-    </div>
+
+  
   </span>
+  <div className="buttons">
       <MarkComplete onClick={onMarkComplete} completed={completed}/>
       <DeleteTodo onClick={onDeleteTodo}/>
+  </div>
 </div>
 )
 

@@ -6,7 +6,7 @@ import TodoApp from './components/TodoApp'
 import LoginPage from './components/LoginPage'
 import LoginForm from './containers/LoginForm'
 
-
+require("../styles/styles.scss");
 // import store, reducer and apply middleware
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux'
 import thunk from 'redux-thunk';
