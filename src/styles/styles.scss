@@ -4,16 +4,79 @@
 }
 
 .description {
-	float: left;
-	padding-right: 1%;
+	
+	font-size: 3em;
+	font-family: 'Josefin Slab', serif;
+	-webkit-text-stroke-width: 0.15px;
+    -webkit-text-stroke-color: white;
 }
 
 .task {
 	padding: 2%;
 	margin: 0.5%;
+	text-align:center;
+	@media (max-width: 720px){
+		padding: 5%;
+	}
 }
 
 .buttons {
 	float: right;
 }
 
+.form {
+	text-align:center;
+}
+
+.form__submit-btn-wrapper{
+	text-align:center;
+	margin:2%;
+}
+
+.form__submit-btn{
+	margin:1%;
+	width: 20%;
+	font-size: 2em;
+	@media (max-width: 720px){
+		width: 48%;
+	}
+}
+
+.form__field-wrapper{
+	margin: 1%;
+	input {
+		width:50%;
+		padding:1vh;
+		font-size: 2em;
+		text-align:center;
+	}
+	height:50%;
+}
+
+.task-input{
+	margin: 1%;
+	font-size: 2em;
+	width: 90%;	
+}
+
+.task-select {
+	margin:1%;
+	font-size: 2em;
+	@media (max-width: 720px){
+		font-size: 1.5em;
+		width: 48%;
+	}
+}
+
+.task-submit {
+	margin: 1%;
+	font-size: 2em;
+	@media (max-width: 720px){
+		font-size: 1.5em;
+		width: 48%;
+	}
+}
+
+.task-form {
+	text-align: center;
+}

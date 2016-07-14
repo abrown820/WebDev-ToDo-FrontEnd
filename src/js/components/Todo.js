@@ -5,8 +5,8 @@ import importanceColour from '../actions/importance'
 
 const Todo = ({description, onMarkComplete, onDeleteTodo, completed, id, importance}) => (
 <div className="task" style={{'backgroundColor': importanceColour(id, importance)}}>
-  <span style={{'textDecoration': completed ? 'line-through' : 'none'}}>
-  
+  <span className="description" style={{'textDecoration': completed ? 'line-through' : 'none'}}>
+  	
     {description}
 
   
