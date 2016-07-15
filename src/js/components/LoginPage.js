@@ -7,7 +7,8 @@ class LoginPage extends React.Component{
     super(props);
   }
   render(){
-    const {username, password, changeCredentials, onSubmitReg, onSubmitLogin} = this.props
+    const {username, password, changeCredentials, onSubmitReg, onSubmitLogin,
+    registerState, loginState} = this.props
     return (
       <div>
         <LoginFields username={username} password={password}
@@ -17,7 +18,9 @@ class LoginPage extends React.Component{
           username={username}
           password={password}
           onSubmitLogin={() => onSubmitLogin(username, password)}
-          onSubmitReg={() => onSubmitReg(username, password)} />
+          onSubmitReg={() => onSubmitReg(username, password)}
+          registerState={registerState}
+          loginState={loginState} />
       </div>
     )
   }
