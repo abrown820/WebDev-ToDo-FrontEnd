@@ -15,8 +15,8 @@ let AddToDo = ({ dispatch }) => {
         dispatch(asyncaddToDo(input.value, parseInt(document.getElementById('importanceSelect').value)))
         input.value = ''
       }}>
-      
-        <input className="task-input" ref={node => {
+
+        <input className="task-input" placeholder="Write your task here..." ref={node => {
           input = node
         }} />
         <select className="task-select" id='importanceSelect'>
