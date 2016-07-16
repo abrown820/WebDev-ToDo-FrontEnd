@@ -11,16 +11,21 @@ class Todo extends React.Component {
 }
 
 changeDescription(e){
-  this.props.updateTodo(parseInt(e.target.id), e.target.value)
+	if (e.target.value != this.props.description) {
+  	this.props.updateTodo(parseInt(e.target.id), e.target.value)
+	}
 }
 
 submitNewDescription(e){
-	this.props.asyncUpdateTodo(parseInt(e.target.id), e.target.value.trim())
+	if (this.props.updating === true) {
+		this.props.asyncUpdateTodo(parseInt(e.target.id), e.target.value.trim())
+	}
 }
 
-	render() {	
+	render() {
 		const {
 			description,
+			updating,
 			onMarkComplete,
 			onDeleteTodo,
 			completed,
