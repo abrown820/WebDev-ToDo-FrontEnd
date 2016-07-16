@@ -1,5 +1,15 @@
 import * as types from '../actionTypes/ActionTypes';
 import * as storage from '../actions/storageCheck';
+
+// helper function to handle errors for all async api calls.
+function handleErr(response){
+  if (!response.ok){
+    console.log(response);
+    throw Error(response.statusText);
+  }
+    return response;
+  }
+
 // Request Todos Actions
 export function asyncrequestToDos(){
   return function(dispatch){
@@ -14,7 +24,7 @@ export function asyncrequestToDos(){
       return response.json();
     })
     .then((json)=>{
-      
+
       dispatch(requestToDosSuccess(json))
     })
   }
@@ -28,7 +38,7 @@ export function requestToDos() {
 }
 
 export function requestToDosSuccess(todos) {
-  
+
   return {
     type: types.REQUEST_TODOS_SUCCESS,
     todos
@@ -130,7 +140,7 @@ export function deleteToDoFailure(id){
     id
   };
 }
-
+// Toggle todos
 export function asynctoggleToDo(id, completed){
   return function(dispatch){
     dispatch(toggleToDo(id, completed));
@@ -141,7 +151,7 @@ export function asynctoggleToDo(id, completed){
     })
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/'+id+'/', {method:"PATCH", headers: myHeaders, body: JSON.stringify(todoContent),mode:'cors'})
     .then((response)=>{
-      dispatch(toggleToDoSuccess(id, completed));  
+      dispatch(toggleToDoSuccess(id, completed));
     })
   }
 }
@@ -169,6 +179,54 @@ export function toggleToDoFailure(id, completed) {
     id,
     completed
   };
+}
+
+export function asyncUpdateTodoDescription(id, newDescription) {
+	return function(dispatch) {
+		var taskDescription = {
+			'taskDescription': newDescription
+		}
+		const myHeaders = new Headers({
+			"Content-Type": "application/json",
+			"Authorization": storage.checkLogin()
+		})
+		return fetch('https://daniel-todo-backend.herokuapp.com/tasks/' + id + '/', {
+				method: "PATCH",
+				headers: myHeaders,
+				body: JSON.stringify(taskDescription),
+				mode: 'cors'
+			})
+			.then(handleErr)
+			.then(() => {
+        dispatch(updateTodoDescriptionSuccess(id, newDescription))
+      })
+			.catch(function(error) {
+				dispatch(updateTodoDescriptionFailure(id))
+        dispatch(asyncrequestToDos())
+			})
+	}
+}
+
+export function updateTodoDescription(id, newDescription){
+  return {
+    type: types.UPDATE_TODO_DESCRIPTION_REQUEST,
+    id,
+    newDescription
+  };
+}
+
+export function updateTodoDescriptionSuccess(id){
+  return {
+    type: types.UPDATE_TODO_DESCRIPTION_SUCCESS,
+    id
+  }
+}
+
+export function updateTodoDescriptionFailure(id){
+  return {
+    type: types.UPDATE_TODO_DESCRIPTION_FAILURE,
+    id
+  }
 }
 
 // Visibility Filers

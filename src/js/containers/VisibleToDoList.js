@@ -1,5 +1,11 @@
 import { connect } from 'react-redux'
-import { asynctoggleToDo, asyncdeleteToDo, asyncrequestToDos  } from '../actions/ToDoActions.js'
+import {
+  asynctoggleToDo,
+  asyncdeleteToDo,
+  asyncrequestToDos,
+  asyncUpdateTodoDescription,
+  updateTodoDescription
+  } from '../actions/ToDoActions.js'
 import TodoList from '../components/TodoList'
 
 const getVisibleTodos = (todos, filter) => {
@@ -30,6 +36,12 @@ const mapDispatchToProps = (dispatch) => {
     },
     getInitialTodos: () => {
       dispatch(asyncrequestToDos())
+    },
+    asyncUpdateTodo: (id, newDescription) => {
+      dispatch(asyncUpdateTodoDescription(id, newDescription))
+    },
+    updateTodo: (id, newDescription) => {
+      dispatch(updateTodoDescription(id, newDescription))
     }
   }
 }

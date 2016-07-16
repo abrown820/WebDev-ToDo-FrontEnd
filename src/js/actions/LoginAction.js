@@ -23,7 +23,6 @@ function handleErr(response){
 export function asyncLogin(username, password){
   return function(dispatch) {
     dispatch(login(username, password))
-    console.log(username,password);
     var loginInfo = {'username': username, 'password': password}
     fetch('https://daniel-todo-backend.herokuapp.com/api-token-auth/',
     {method:'POST',
@@ -39,9 +38,8 @@ export function asyncLogin(username, password){
     .then(response => {
       return response.json();
     }).then( (json) => {
-      storage.storeToken(json.token);     
+      storage.storeToken(json.token);
       
-
     }).then( () => {
       dispatch(loginSuccess());
       dispatch(push('/todo'))
