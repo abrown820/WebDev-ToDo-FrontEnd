@@ -4,7 +4,6 @@ import * as storage from '../actions/storageCheck';
 // helper function to handle errors for all async api calls.
 function handleErr(response){
   if (!response.ok){
-    console.log(response);
     throw Error(response.statusText);
   }
     return response;
@@ -114,7 +113,6 @@ export function asyncdeleteToDo(id){
     })
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/'+id+'/', {method:"DELETE", headers: myHeaders,mode:'cors'})
     .then((response)=>{
-      console.log(response)
       dispatch(deleteToDoSuccess(id));
     })
   }

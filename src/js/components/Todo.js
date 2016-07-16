@@ -34,7 +34,7 @@ submitNewDescription(e){
 		return (
 			<div className="task" style={{
 					'backgroundColor': importanceColour(id, importance),
-					'opacity': status.deletingTodo ? '0.5' : '1'}}>
+					'opacity': status.deletingTodo ? '0.4' : '1'}}>
 
 				<input value={description} id={id} onChange={this.changeDescription} onBlur={this.submitNewDescription}
 					className="description" style={{
