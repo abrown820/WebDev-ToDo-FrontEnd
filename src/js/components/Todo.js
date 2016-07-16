@@ -18,7 +18,7 @@ submitNewDescription(e){
 	this.props.asyncUpdateTodo(parseInt(e.target.id), e.target.value.trim())
 }
 
-	render() {
+	render() {	
 		const {
 			description,
 			onMarkComplete,

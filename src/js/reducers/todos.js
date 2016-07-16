@@ -52,7 +52,7 @@ function todos(state = [], action) {
 			})
 			return state.slice(0, idLocation).concat(state.slice(idLocation+1))
 
-		case 'TOGGLE_COMPLETE_SUCCESS':
+		case 'TOGGLE_COMPLETE_REQUEST':
 			return state.map((todo, id) => {
 				if (todo.id === action.id) {
 					return Object.assign({}, todo, {
@@ -60,6 +60,15 @@ function todos(state = [], action) {
 					})
 				}
 				return todo
+			})
+
+		case 'TOGGLE_COMPLETE_FAILURE':
+			return state.map((todo, id) => {
+				if (todo.id === action.id) {
+					return Object.assign({}, todo, {
+						completed: !todo.completed
+					})
+				}
 			})
 
 		case 'REQUEST_TODOS_SUCCESS':

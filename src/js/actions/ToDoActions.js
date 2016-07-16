@@ -150,8 +150,12 @@ export function asynctoggleToDo(id, completed){
       "Authorization": storage.checkLogin()
     })
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/'+id+'/', {method:"PATCH", headers: myHeaders, body: JSON.stringify(todoContent),mode:'cors'})
+    .then(handleErr)
     .then((response)=>{
-      dispatch(toggleToDoSuccess(id, completed));
+      dispatch(toggleToDoSuccess(id));
+    })
+    .catch(function(error){
+      dispatch(toggleToDoFailure(id))
     })
   }
 }
@@ -165,19 +169,19 @@ export function toggleToDo(id, completed) {
   };
 }
 
+// Doesn't need to actually toggle as the initial Request will do so,
+// only needs to alert failure in which case toggle is undone
 export function toggleToDoSuccess(id, completed) {
   return {
     type: types.TOGGLE_COMPLETE_SUCCESS,
-    id,
-    completed
+    id
   };
 }
 
-export function toggleToDoFailure(id, completed) {
+export function toggleToDoFailure(id) {
   return {
     type: types.TOGGLE_COMPLETE_FAILURE,
-    id,
-    completed
+    id
   };
 }
 
