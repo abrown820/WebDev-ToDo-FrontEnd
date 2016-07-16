@@ -17,7 +17,7 @@ changeDescription(e){
 }
 
 submitNewDescription(e){
-	if (this.props.updating === true) {
+	if (this.props.status.updatingDescription === true) {
 		this.props.asyncUpdateTodo(parseInt(e.target.id), e.target.value.trim())
 	}
 }
@@ -25,26 +25,27 @@ submitNewDescription(e){
 	render() {
 		const {
 			description,
-			updating,
+			status,
 			onMarkComplete,
 			onDeleteTodo,
-			completed,
 			id,
 			importance
 		} = this.props;
 		return (
-			<div className="task" style={{'backgroundColor': importanceColour(id, importance)
-			}}>
+			<div className="task" style={{
+					'backgroundColor': importanceColour(id, importance),
+					'opacity': status.deletingTodo ? '0.5' : '1'}}>
+
 				<input value={description} id={id} onChange={this.changeDescription} onBlur={this.submitNewDescription}
 					className="description" style={{
-					'textDecoration': completed
+					'textDecoration': status.completed
 						? 'line-through'
 						: 'none',
 					'background': 'transparent',
 					'border': 'none'}}>
       </input>
 				<div className="buttons">
-					<MarkComplete onClick={onMarkComplete} completed={completed}/>
+					<MarkComplete onClick={onMarkComplete} completed={status.completed}/>
 					<DeleteTodo onClick={onDeleteTodo}/>
 
 				</div>

@@ -114,6 +114,7 @@ export function asyncdeleteToDo(id){
     })
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/'+id+'/', {method:"DELETE", headers: myHeaders,mode:'cors'})
     .then((response)=>{
+      console.log(response)
       dispatch(deleteToDoSuccess(id));
     })
   }

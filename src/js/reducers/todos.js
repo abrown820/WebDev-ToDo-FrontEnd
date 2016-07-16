@@ -8,7 +8,7 @@ function todos(state = [], action) {
 				id: action.id,
 				description: action.description,
 				importance: action.importance,
-				completed: false
+				status: { completed: false }
 			}]
 
 // Updating a ToDo Description
@@ -17,7 +17,7 @@ function todos(state = [], action) {
 			if (todo.id === action.id) {
 				return Object.assign({}, todo, {
 					description: action.newDescription,
-					updating: true
+					status: { ...todo.status, updatingDescription: true }
 				})
 			}
 			return todo
@@ -27,7 +27,7 @@ function todos(state = [], action) {
 		return state.map((todo, id) => {
 			if (todo.id === action.id) {
 				return Object.assign({}, todo, {
-					updating: false
+					status: { ...todo.status, updatingDescription: false }
 				})
 			}
 		return todo
@@ -37,7 +37,17 @@ function todos(state = [], action) {
 		return state.map((todo, id) => {
 			if (todo.id === action.id){
 				return Object.assign({}, todo, {
-					updating: 'FAILED'
+					status: { ...todo.status, updatingDescription: 'FAILED' }
+				}
+			)}
+			return todo
+		})
+
+		case 'DELETE_TODO_REQUEST':
+		return state.map((todo, id) => {
+			if (todo.id === action.id){
+				return Object.assign({}, todo, {
+					status: { ...todo.status, deletingTodo: true }
 				}
 			)}
 			return todo
@@ -56,7 +66,7 @@ function todos(state = [], action) {
 			return state.map((todo, id) => {
 				if (todo.id === action.id) {
 					return Object.assign({}, todo, {
-						completed: !todo.completed
+						status: { ...todo.status, completed: !todo.status.completed }
 					})
 				}
 				return todo
@@ -66,7 +76,7 @@ function todos(state = [], action) {
 			return state.map((todo, id) => {
 				if (todo.id === action.id) {
 					return Object.assign({}, todo, {
-						completed: !todo.completed
+						status: { ...todo.status, completed: !todo.status.completed }
 					})
 				}
 			})
@@ -77,7 +87,7 @@ function todos(state = [], action) {
 					id: parseInt(todo.url.split('/')[4]),
 					description: todo.taskDescription,
 					importance: todo.taskImportance,
-					completed: todo.taskCompleted
+					status: { completed: todo.taskCompleted }
 				}
 			}))
 		default:
