@@ -5,11 +5,12 @@ import LoginPage from '../components/LoginPage'
 
   const mapStateToProps = (state) => {
 
-    return{
+    return {
     username: state.toDoAppReducer.credentials.account.username,
     password: state.toDoAppReducer.credentials.account.password,
     registerState: state.toDoAppReducer.registerStatus.registrationStatus,
-    loginState: state.toDoAppReducer.logInStatus.loginStatus
+    logInState: state.toDoAppReducer.logInStatus.logInStatus,
+    logInError: state.toDoAppReducer.errors.login
     };
   }
 
