@@ -14,7 +14,6 @@ export function changeForm(username, password){
 // helper function to handle errors for all async api calls.
 function handleErr(response){
   if (!response.ok){
-    console.log(response)
     throw Error(response.status);
   }
     return response;
@@ -47,7 +46,6 @@ export function asyncLogin(username, password){
       dispatch(push('/todo'))
     })
     .catch(function(error){
-      console.log(error)
       dispatch(loginFailure())
       if (error.message == 400) {
         dispatch(loginBadRequest())
@@ -105,7 +103,6 @@ export function asyncRegister(username, password){
     .then(() => dispatch(registerSuccess()))
     .catch(function(error){
       dispatch(registerFailure())
-      console.log(error)
       })
     .then(
       () => {dispatch(asyncLogin(username, password));}

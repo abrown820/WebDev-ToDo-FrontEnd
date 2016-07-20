@@ -6,17 +6,21 @@ class ErrorAlert extends React.Component{
     super(props)
   }
 
+componentWillUpdate(){
+
+}
+
   render() {
-    const errorList = this.props;
+    const errorList = this.props
 
     return (
         <div>
-          {errorList.length > 0 ? errorList.map(function(value, index){
-            return
-              <ErrorMessage immediateError={value} key={index}/>
+            {errorList.length > 0 ? errorList.map(function(value, index){
+              return <ErrorMessage immediateError={value} key={index} />
             })
-          : null}
-       </div>
+            : null
+          }
+        </div>
       )
     }
   }

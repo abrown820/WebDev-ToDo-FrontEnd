@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import {asyncLogin, asyncRegister, changeForm} from '../actions/LoginAction'
-import LoginPage from '../components/LoginPage'
+import LoginFieldsAndButtons from '../components/LoginFieldsAndButtons'
 
   const mapStateToProps = (state) => {
 
@@ -28,6 +28,6 @@ import LoginPage from '../components/LoginPage'
     }
   }
 
-const LoginForm = connect(mapStateToProps, mapDispatchToProps)(LoginPage)
+const LoginForm = connect(mapStateToProps, mapDispatchToProps)(LoginFieldsAndButtons)
 
 export default LoginForm

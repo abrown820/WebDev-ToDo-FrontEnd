@@ -5,11 +5,10 @@ import ErrorAlert from '../components/ErrorAlert'
 function findErrors(errors) {
   let errorReports = []
   errors.filter(function(error){
-    if (errors[error] != 'NONE'){
+    if (error != 'NONE'){
       errorReports.push(error)
     }
   })
-  console.log(errorReports)
   return errorReports
 }
 
