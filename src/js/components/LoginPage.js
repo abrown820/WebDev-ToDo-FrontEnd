@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import LoginFields from './LoginFields'
 import LoginSubmitButtons from './LoginSubmitButtons'
+import ErrorNotification from '../containers/ErrorNotification'
 
 class LoginPage extends React.Component{
   constructor(props){
@@ -8,7 +9,7 @@ class LoginPage extends React.Component{
   }
   render(){
     const {username, password, changeCredentials, onSubmitReg, onSubmitLogin,
-    registerState, loginState} = this.props
+    registerState, logInState, logInError} = this.props
     return (
       <div>
         <LoginFields username={username} password={password}
@@ -20,7 +21,14 @@ class LoginPage extends React.Component{
           onSubmitLogin={() => onSubmitLogin(username, password)}
           onSubmitReg={() => onSubmitReg(username, password)}
           registerState={registerState}
-          loginState={loginState} />
+          logInState={logInState} />
+
+        {
+          logInError.description != undefined
+          ? <ErrorNotification />
+        : null
+        }
+
       </div>
     )
   }
