@@ -15,6 +15,11 @@ function registerStatus(state = {registered: false, registrationStatus: 'NOT_ATT
       registered: false,
       registrationStatus: 'FAILED'
     }
+    case 'LOGIN_SUCCESS':
+    return {
+      registered: true,
+      registrationStatus: 'already registered'
+    }
     default:
     return state
   }

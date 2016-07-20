@@ -1,19 +1,19 @@
-function logInStatus(state = {loggedIn: false, loginStatus: 'NOT_ATTEMPTED'}, action) {
+function logInStatus(state = {loggedIn: false, logInStatus: 'NOT_ATTEMPTED'}, action) {
   switch(action.type) {
     case 'LOGIN':
     return {
       loggedIn: false,
-      loginStatus: 'IN_PROCESS'
+      logInStatus: 'IN_PROCESS'
     }
     case 'LOGIN_SUCCESS':
     return {
       loggedIn: true,
-      loginStatus: 'SUCCESFUL'
+      logInStatus: 'SUCCESFUL'
     }
     case 'LOGIN_FAILURE':
     return {
       loggedIn: false,
-      loginStatus: 'FAILED'
+      logInStatus: 'FAILED'
     }
     default:
     return state
