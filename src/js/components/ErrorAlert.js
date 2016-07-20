@@ -16,7 +16,7 @@ componentWillUpdate(){
     return (
         <div>
             {errorList.length > 0 ? errorList.map(function(value, index){
-              return <ErrorMessage immediateError={value} key={index} />
+              return <ErrorMessage immediateError={value} index={index} />
             })
             : null
           }

@@ -1,8 +1,9 @@
 import React from 'react'
 
-const ErrorMessage = ( immediateError, key ) => (
+const ErrorMessage = ({ immediateError, index }) => (
 
-   <div className='alert alert-danger' role='alert' key={key} >
+   <div className='alert alert-danger' role='alert' key={index}
+      immediateError={immediateError} >
      {immediateError}
     </div>
 )
