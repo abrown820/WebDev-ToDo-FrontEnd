@@ -1,5 +1,6 @@
 import * as actions from '../actionTypes/ActionTypes'
 import * as storage from '../actions/storageCheck'
+import { loginBadRequest, refreshErrorState } from './ErrorActions'
 import { push } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 // handles changing login / register form changes
@@ -13,8 +14,8 @@ export function changeForm(username, password){
 // helper function to handle errors for all async api calls.
 function handleErr(response){
   if (!response.ok){
-    console.log(response);
-    throw Error(response.statusText);
+    console.log(response)
+    throw Error(response.status);
   }
     return response;
   }
@@ -39,14 +40,18 @@ export function asyncLogin(username, password){
       return response.json();
     }).then( (json) => {
       storage.storeToken(json.token);
-      
+
     }).then( () => {
       dispatch(loginSuccess());
+      dispatch(refreshErrorState());
       dispatch(push('/todo'))
     })
     .catch(function(error){
-      dispatch(loginFailure())
       console.log(error)
+      dispatch(loginFailure())
+      if (error.message == 400) {
+        dispatch(loginBadRequest())
+      }
     })
   }
   }

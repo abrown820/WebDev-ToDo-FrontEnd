@@ -1,11 +1,12 @@
 import * as types from '../actionTypes/ActionTypes';
 import * as storage from '../actions/storageCheck';
+import { actionBadPermissions } from './ErrorActions'
 
 // helper function to handle errors for all async api calls.
 function handleErr(response){
   if (!response.ok){
-    throw Error(response.statusText);
-  }
+    throw Error(response.status);
+    }
     return response;
   }
 
@@ -19,12 +20,18 @@ export function asyncrequestToDos(){
     });
 
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/', {method:"GET", headers: myHeaders, mode:'cors'})
+    .then(handleErr)
     .then((response)=>{
       return response.json();
     })
     .then((json)=>{
-
       dispatch(requestToDosSuccess(json))
+    })
+    .catch(function(error){
+      if (error.message == 401){
+        dispatch(actionBadPermissions())
+      }
+      dispatch(requestToDosFailure())
     })
   }
 }
@@ -67,14 +74,18 @@ export function asyncaddToDo(description, importance) {
       "Authorization": storage.checkLogin()
     })
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/', {method:"POST", headers: myHeaders, body: JSON.stringify(todoContent),mode:'cors'})
-    .then((response)=>{
-      return response.json()
-    })
-    .then((json) => {
+    .then(handleErr)
+    .then((response) => {
+      let json = response.json()
       var id = parseInt(json.url.split('/')[4])
       dispatch(addToDoSuccess(id, description, importance))
+      })
+    .catch(function(error){
+      if (error.message == 401){
+        dispatch(actionBadPermissions())
       }
-    )
+    })
+    .then(dispatch(addToDoFailure()))
   }
 }
 
@@ -112,8 +123,12 @@ export function asyncdeleteToDo(id){
       "Authorization": storage.checkLogin()
     })
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/'+id+'/', {method:"DELETE", headers: myHeaders,mode:'cors'})
+    .then(handleErr)
     .then((response)=>{
       dispatch(deleteToDoSuccess(id));
+    })
+    .catch(function(error){
+      dispatch(deleteToDoFailure(id))
     })
   }
 }
