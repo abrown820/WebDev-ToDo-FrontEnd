@@ -30,7 +30,7 @@ render(
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={LoginForm}/>
-      <Route path="todo" component={TodoApp}/>      
+      <Route path="todo" component={TodoApp}/>
     </Router>
   </Provider>,
   document.getElementById('root')
