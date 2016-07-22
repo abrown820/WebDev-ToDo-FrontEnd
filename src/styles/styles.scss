@@ -1,10 +1,13 @@
 .alert__notification-wrapper{
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .alert {
+display: flex;
+justify-content: center;
 padding: 8px 35px 8px 14px;
 max-width: 50%;
 margin-bottom: 18px;
