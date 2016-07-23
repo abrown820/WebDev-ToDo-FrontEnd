@@ -8,10 +8,6 @@ class LoginFieldsAndButtons extends React.Component{
     super(props);
   }
 
-componentDidMount(){
-  console.log(this.props.disableFields)
-}
-
   render(){
     const {username, password, changeCredentials, onSubmitReg, onSubmitLogin,
     disableFields} = this.props
