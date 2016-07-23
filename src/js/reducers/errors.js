@@ -19,8 +19,8 @@ function errors(state = [], action) {
       })
         return [...state.slice(0, errorIndex), ...state.slice(errorIndex + 1)]
 
-      case 'DISMISS_ALL':
-      return state=[]
+      case 'DISMISS_ALL_ERRORS':
+      return state = []
 
       default:
         return state

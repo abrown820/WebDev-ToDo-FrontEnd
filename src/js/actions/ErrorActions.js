@@ -20,6 +20,6 @@ export function dismissError(id){
 
 export function dismissAllErrors(){
   return {
-    type: actions.DISSMIS_ALL_ERRORS
+    type: actions.DISMISS_ALL_ERRORS
   }
 }
