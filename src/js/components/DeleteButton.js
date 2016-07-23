@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DeleteTodo = ({ onClick }) => (
+const DeleteButton = ({ onClick }) => (
   <i className="fa fa-times fa-2x"
   style={{color: 'red'}}
   onClick={onClick}
@@ -8,4 +8,4 @@ const DeleteTodo = ({ onClick }) => (
   </i>
 )
 
-export default DeleteTodo
+export default DeleteButton

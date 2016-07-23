@@ -1,10 +1,13 @@
 import React from 'react'
+import DeleteButton from './DeleteButton'
 
-const ErrorMessage = ({ immediateError }) => (
+const ErrorMessage = ({ error, onClick }) => (
 
    <div className='alert alert-danger' role='alert'>
-     {immediateError}
+     {error}
+     <DeleteButton onClick={onClick} />
     </div>
+
 )
 
 export default ErrorMessage

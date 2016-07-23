@@ -1,34 +1,41 @@
 import React from 'react'
 import ErrorMessage from './ErrorMessage'
+import DeleteButton from './DeleteButton'
 
 class ErrorAlert extends React.Component{
   constructor(props){
     super(props)
-    this.findErrors = this.findErrors.bind(this)
+    this.returnErrors = this.returnErrors.bind(this)
+    this.dismissAll = this.dismissAll.bind(this)
   }
 
-  findErrors(errorsArray) {
-    const errorReports = []
-    errorsArray.filter(function(error){
-      if (error != 'NONE'){
-        errorReports.push(error)
-      }
-    })
-    return errorReports
+returnErrors(errorArray){
+  if (errorArray.length > 0){
+    return errorArray.map((errorObject) => {
+        return <ErrorMessage error={`Error during ${errorObject.error}, ${errorObject.description}`}
+          key={errorObject.id} onClick={() => this.props.dismissError(errorObject.id)} />
+      })
+    }
+    else {
+        return null
   }
+}
 
+dismissAll(){
+  if ( this.props.errorList.length > 1){
+    return <div>Dismiss all errors: <DeleteButton onClick={() => this.props.dismissAll()} /> </div>
+  }
+  return null
+}
 
   render() {
-
-    const errorReports = this.findErrors(this.props.errorList)
+let renderedErrors = this.returnErrors(this.props.errorList)
+let dismissAll = this.dismissAll()
 
     return (
         <div className="alert__notification-wrapper">
-            {errorReports.length > 0 ? errorReports.map(function(value, index){
-              return <ErrorMessage immediateError={value} key={index} />
-            })
-            : null
-          }
+          {renderedErrors}
+          {dismissAll}
         </div>
       )
     }

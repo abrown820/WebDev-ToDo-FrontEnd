@@ -1,19 +1,25 @@
 import * as actions from '../actionTypes/ActionTypes'
 
-export function loginBadRequest(){
+let errorId = 1
+
+export function newError(errorAction, description){
   return {
-    type: actions.LOGIN_BAD_REQUEST
+    type: actions.NEW_ERROR,
+    id: errorId++,
+    errorAction,
+    description
   }
 }
 
-export function actionBadPermissions(){
+export function dismissError(id){
   return {
-    type: actions.ACTION_BAD_PERMISSIONS
+    type: actions.DISMISS_ERROR,
+    id
   }
 }
 
-export function refreshErrorState(){
+export function dismissAllErrors(){
   return {
-    type: actions.REFRESH_ERROR_STATE
+    type: actions.DISSMIS_ALL_ERRORS
   }
 }

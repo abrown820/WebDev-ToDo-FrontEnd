@@ -1,5 +1,5 @@
 import React from 'react';
-import DeleteTodo from './DeleteTodo';
+import DeleteButton from './DeleteButton';
 import MarkComplete from './MarkComplete'
 import importanceColour from '../actions/importance'
 
@@ -46,7 +46,7 @@ submitNewDescription(e){
       </input>
 				<div className="buttons">
 					<MarkComplete onClick={onMarkComplete} completed={status.completed}/>
-					<DeleteTodo onClick={onDeleteTodo}/>
+					<DeleteButton onClick={onDeleteTodo}/>
 
 				</div>
 			</div>

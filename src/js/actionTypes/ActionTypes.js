@@ -43,6 +43,11 @@ export const TOGGLE_COMPLETE_REQUEST = 'TOGGLE_COMPLETE_REQUEST'
 export const TOGGLE_COMPLETE_FAILURE = 'TOGGLE_COMPLETE_FAILURE'
 export const TOGGLE_COMPLETE_SUCCESS = 'TOGGLE_COMPLETE_SUCCESS'
 
+// new errrors
+export const NEW_ERROR = 'NEW_ERROR'
+export const DISMISS_ERROR = 'DISMISS_ERROR'
+export const DISMISS_ALL_ERRORS = 'DISMISS_ALL_ERRORSs'
+
 //Visiblity Filters
 export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
 export const VisibilityFilters = {
