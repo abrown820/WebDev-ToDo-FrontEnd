@@ -39,10 +39,8 @@ export function asyncLogin(username, password){
       return response.json();
     }).then( (json) => {
       storage.storeToken(json.token);
-
     }).then( () => {
       dispatch(loginSuccess());
-      dispatch(refreshErrorState());
       dispatch(push('/todo'))
     })
     .catch(function(error){
