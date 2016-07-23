@@ -5,12 +5,22 @@ import LoginFieldsAndButtons from '../components/LoginFieldsAndButtons'
 
   const mapStateToProps = (state) => {
 
+  const logInStatus = state.toDoAppReducer.authentication.logInStatus
+  const registerStatus = state.toDoAppReducer.authentication.registerStatus
+
+  function disableFields(logInStatus, registerStatus){
+    if (logInStatus == 'ATTEMPTING' || registerStatus == 'ATTEMPTING'){
+      return true
+    }
+    else {
+      return false
+    }
+  }
+
     return {
-    username: state.toDoAppReducer.credentials.account.username,
-    password: state.toDoAppReducer.credentials.account.password,
-    registerState: state.toDoAppReducer.registerStatus.registrationStatus,
-    logInState: state.toDoAppReducer.logInStatus.logInStatus,
-    logInError: state.toDoAppReducer.errors.login
+    username: state.toDoAppReducer.credentials.username,
+    password: state.toDoAppReducer.credentials.password,
+    disableFields: disableFields(logInStatus, registerStatus)
     };
   }
 

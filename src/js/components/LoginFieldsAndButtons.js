@@ -7,9 +7,14 @@ class LoginFieldsAndButtons extends React.Component{
   constructor(props){
     super(props);
   }
+
+componentDidMount(){
+  console.log(this.props.disableFields)
+}
+
   render(){
     const {username, password, changeCredentials, onSubmitReg, onSubmitLogin,
-    registerState, logInState, logInError} = this.props
+    disableFields} = this.props
     return (
       <div>
         <LoginFields username={username} password={password}
@@ -20,8 +25,7 @@ class LoginFieldsAndButtons extends React.Component{
           password={password}
           onSubmitLogin={() => onSubmitLogin(username, password)}
           onSubmitReg={() => onSubmitReg(username, password)}
-          registerState={registerState}
-          logInState={logInState} />
+          disableFields={disableFields} />
 
       </div>
     )
