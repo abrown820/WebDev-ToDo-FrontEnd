@@ -1,27 +1,15 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import {asyncLogin, asyncRegister, changeForm} from '../actions/LoginAction'
 import LoginFieldsAndButtons from '../components/LoginFieldsAndButtons'
+import { interactingWithServer } from '../selectors/index.js'
+
 
   const mapStateToProps = (state) => {
-
-  const logInStatus = state.toDoAppReducer.authentication.logInStatus
-  const registerStatus = state.toDoAppReducer.authentication.registerStatus
-
-  function disableFields(logInStatus, registerStatus){
-    if (logInStatus == 'ATTEMPTING' || registerStatus == 'ATTEMPTING'){
-      return true
-    }
-    else {
-      return false
-    }
-  }
-
     return {
-    username: state.toDoAppReducer.credentials.username,
-    password: state.toDoAppReducer.credentials.password,
-    disableFields: disableFields(logInStatus, registerStatus)
-    };
+      username: state.toDoAppReducer.credentials.username,
+      password: state.toDoAppReducer.credentials.password,
+      disableFields: interactingWithServer(state)
+    }
   }
 
   const mapDispatchToProps = (dispatch) =>{

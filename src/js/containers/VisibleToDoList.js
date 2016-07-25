@@ -8,6 +8,8 @@ import {
   } from '../actions/ToDoActions.js'
 import TodoList from '../components/TodoList'
 
+
+
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
     case 'SHOW_ALL':
@@ -21,8 +23,8 @@ const getVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = (state) => {
   return {
-    VisibleTodos: getVisibleTodos(state.toDoAppReducer.todos, state.toDoAppReducer.visibilityFilter),
-    Todos: state.toDoAppReducer.todos
+    visibleTodos: getVisibleTodos(state.toDoAppReducer.todos, state.toDoAppReducer.visibilityFilter),
+    todos: state.toDoAppReducer.todos
   }
 }
 
