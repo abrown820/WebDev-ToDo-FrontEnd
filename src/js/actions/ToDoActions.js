@@ -1,6 +1,6 @@
 import * as types from '../actionTypes/ActionTypes';
 import * as storage from '../actions/storageCheck';
-import { actionBadPermissions, newError } from './ErrorActions'
+import { actionBadPermissions, newErrorWithTimeout } from './ErrorActions'
 
 // helper function to handle errors for all async api calls.
 function handleErr(response){
@@ -30,7 +30,7 @@ export function asyncrequestToDos(){
     .catch(function(error){
       if (error.message == 401){
         dispatch(actionBadPermissions())
-        dispatch(newError('request todos', 'your access token has expired, please log in again.'))
+        dispatch(newErrorWithTimeout('request todos', 'your access token has expired, please log in again.'))
       }
       dispatch(requestToDosFailure())
     })
@@ -84,11 +84,11 @@ export function asyncaddToDo(description, importance) {
     .catch(function(error){
       if (error.message == 401){
         dispatch(actionBadPermissions())
-        dispatch(newError('add todo', 'your token has expired, please log in again.'))
+        dispatch(newErrorWithTimeout('add todo', 'your token has expired, please log in again.'))
       }
     })
     .then(dispatch(addToDoFailure()))
-    .then(dispatch(newError('add todo', `your task ${description} failed to send`)))
+    .then(dispatch(newErrorWithTimeout('add todo', `your task "${description}" failed to send`)))
   }
 }
 
@@ -132,7 +132,7 @@ export function asyncdeleteToDo(id){
     })
     .catch(function(error){
       dispatch(deleteToDoFailure(id))
-      dispatch(newError('delete todo', 'failed to delete your task on the server.'))
+      dispatch(newErrorWithTimeout('delete todo', 'failed to delete your task on the server.'))
     })
   }
 }
@@ -174,7 +174,7 @@ export function asynctoggleToDo(id, completed){
     })
     .catch(function(error){
       dispatch(toggleToDoFailure(id))
-      dispatch(newError('toggle todo', 'failed to send completion of task to server'))
+      dispatch(newErrorWithTimeout('toggle todo', 'failed to send completion of task to server'))
     })
   }
 }
@@ -225,7 +225,7 @@ export function asyncUpdateTodoDescription(id, newDescription) {
       })
 			.catch(function(error) {
 				dispatch(updateTodoDescriptionFailure(id))
-        dispatch(newError('updating task description', 'the server did not register the update description'))
+        dispatch(newErrorWithTimeout('updating task description', 'the server did not register the update description'))
         dispatch(asyncrequestToDos())
 			})
 	}

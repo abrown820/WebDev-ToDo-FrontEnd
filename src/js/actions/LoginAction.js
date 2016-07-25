@@ -1,6 +1,6 @@
 import * as actions from '../actionTypes/ActionTypes'
 import * as storage from '../actions/storageCheck'
-import { loginBadRequest, refreshErrorState, newError } from './ErrorActions'
+import { loginBadRequest, refreshErrorState, newErrorWithTimeout } from './ErrorActions'
 import { push } from 'react-router-redux'
 import { browserHistory } from 'react-router'
 // handles changing login / register form changes
@@ -46,10 +46,10 @@ export function asyncLogin(username, password){
     .catch(function(error){
       dispatch(loginFailure())
       if (error.message == 400) {
-        dispatch(newError('login', 'the username or password supplied was not found.'))
+        dispatch(newErrorWithTimeout('login', 'the username or password supplied was not found.'))
       }
       else{
-        dispatch(newError('login', 'something went wrong with login.'))
+        dispatch(newErrorWithTimeout('login', 'something went wrong with login.'))
       }
     })
   }
@@ -107,7 +107,7 @@ export function asyncRegister(username, password){
       })
     .catch(function(error){
       dispatch(registerFailure())
-      dispatch(newError('register', 'registration failed, please try again later.'))
+      dispatch(newErrorWithTimeout('register', 'registration failed, please try again later.'))
       })
     }
   }
