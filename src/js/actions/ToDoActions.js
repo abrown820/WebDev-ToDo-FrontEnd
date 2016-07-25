@@ -29,8 +29,7 @@ export function asyncrequestToDos(){
     })
     .catch(function(error){
       if (error.message == 401){
-        dispatch(actionBadPermissions())
-        dispatch(newErrorWithTimeout('request todos', 'your access token has expired, please log in again.'))
+        dispatch(newErrorWithTimeout('request todos', 'your access token has expired - please log in again.'))
       }
       dispatch(requestToDosFailure())
     })
