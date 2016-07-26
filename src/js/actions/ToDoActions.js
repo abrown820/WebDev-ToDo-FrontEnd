@@ -83,11 +83,11 @@ export function asyncaddToDo(description, importance) {
     .catch(function(error){
       if (error.message == 401){
         dispatch(actionBadPermissions())
-        dispatch(newErrorWithTimeout('add todo', 'your token has expired, please log in again.'))
+        dispatch(newErrorWithTimeout('add task', 'your token has expired, please log in again.'))
       }
     })
     .then(dispatch(addToDoFailure()))
-    .then(dispatch(newErrorWithTimeout('add todo', `your task "${description}" failed to send`)))
+    .then(dispatch(newErrorWithTimeout('add task', `your task "${description}" failed to send.`)))
   }
 }
 
@@ -173,7 +173,7 @@ export function asynctoggleToDo(id, completed){
     })
     .catch(function(error){
       dispatch(toggleToDoFailure(id))
-      dispatch(newErrorWithTimeout('toggle todo', 'failed to send completion of task to server'))
+      dispatch(newErrorWithTimeout('toggle todo', 'failed to send completion of task to server.'))
     })
   }
 }
@@ -224,7 +224,7 @@ export function asyncUpdateTodoDescription(id, newDescription) {
       })
 			.catch(function(error) {
 				dispatch(updateTodoDescriptionFailure(id))
-        dispatch(newErrorWithTimeout('updating task description', 'the server did not register the update description'))
+        dispatch(newErrorWithTimeout('updating task description', 'the server did not register the update description.'))
         dispatch(asyncrequestToDos())
 			})
 	}
