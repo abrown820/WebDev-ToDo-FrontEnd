@@ -29,6 +29,7 @@ submitNewDescription(e){
 			onMarkComplete,
 			onDeleteTodo,
 			id,
+			taskID,
 			importance
 		} = this.props;
 		return (
