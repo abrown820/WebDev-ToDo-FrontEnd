@@ -101,13 +101,13 @@ export function asyncRegister(username, password){
       mode:'cors'
     })
     .then(handleErr)
+    .then(dispatch(registerSuccess()))
     .then((username, password) => {
-      dispatch(registerSuccess())
       dispatch(asyncLogin(username, password))
-      })
+    })
     .catch(function(error){
       dispatch(registerFailure())
-      dispatch(newErrorWithTimeout('register', 'registration failed, please try again later.'))
+      dispatch(newErrorWithTimeout('register', 'registration failed - please try again later.'))
       })
     }
   }
@@ -115,9 +115,7 @@ export function asyncRegister(username, password){
 // local update to state upon registering
 export function register(username, password){
   return {
-    type: actions.REGISTER,
-    username,
-    password
+    type: actions.REGISTER
   }
 }
 
