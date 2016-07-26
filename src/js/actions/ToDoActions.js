@@ -1,14 +1,15 @@
 import * as types from '../actionTypes/ActionTypes';
 import * as storage from '../actions/storageCheck';
 import { actionBadPermissions, newErrorWithTimeout } from './ErrorActions'
-
+import { push } from 'react-router-redux'
 // helper function to handle errors for all async api calls.
 function handleErr(response){
   if (!response.ok){
+    console.log(response);
     throw Error(response.status);
-    }
-    return response;
   }
+  return response;
+}
 
 // Request Todos Actions
 export function asyncrequestToDos(){
@@ -66,54 +67,64 @@ export function receiveTodos(todos) {
 }
 
 export function asyncaddToDo(description, importance) {
+  var taskid = 'xxxxxxxx-xxxx'.replace(/[xy]/g, function(c) {var r = Math.random()*16|0,v=c=='x'?r:r&0x3|0x8;return v.toString(16);});
   return function (dispatch) {
-    dispatch(addToDo(description, importance));
-    var todoContent = {'taskDescription': description,'taskCompleted':false, 'taskImportance': importance}
+    dispatch(addToDoRequest(description, importance, taskid));
+    var todoContent = {'taskDescription': description,'taskCompleted':false, 'taskImportance': importance, taskID: taskid}
     const myHeaders = new Headers({
       "Content-Type": "application/json",
       "Authorization": storage.checkLogin()
     })
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/', {method:"POST", headers: myHeaders, body: JSON.stringify(todoContent),mode:'cors'})
     .then(handleErr)
-    .then((response) => {
-      let json = response.json()
-      var id = parseInt(json.url.split('/')[4])
-      dispatch(addToDoSuccess(id, description, importance))
+    .then((response)=>{
+      return response.json();
+    })
+    .then((json) => {
+      var id = parseInt(json.url.split('/')[4]);
+      var taskid = json.taskID;
+      dispatch(addToDoSuccess(id, taskid,description, importance))
       })
     .catch(function(error){
       if (error.message == 401){
-        dispatch(actionBadPermissions())
-        dispatch(newErrorWithTimeout('add task', 'your token has expired, please log in again.'))
+        dispatch(newErrorWithTimeout('add todo', 'your token has expired, please log in again.'))
+        //dispatch(actionBadPermissions())
+        dispatch(push('/'))
       }
+      dispatch(addToDoFailure(taskid))
+      dispatch(newErrorWithTimeout('add todo', `your task "${description}" failed to send`))
     })
-    .then(dispatch(addToDoFailure()))
-    .then(dispatch(newErrorWithTimeout('add task', `your task "${description}" failed to send.`)))
+    
+    
   }
 }
 
 // Add Todo Actions
-export function addToDo(description, importance) {
+export function addToDoRequest(description, importance, taskid) {
   return {
     type: types.ADD_TODO_REQUEST,
     description,
     importance,
+    taskid,
     completed: false
   }
 }
 
-export function addToDoSuccess(id, description,importance){
+export function addToDoSuccess(id, taskid, description,importance){
+  
   return {
     type: types.ADD_TODO_SUCCESS,
     id,
+    taskid,
     description,
     importance
   }
 }
 
-export function addToDoFailure(id){
+export function addToDoFailure(taskid){
   return {
     type: types.ADD_TODO_FAILURE,
-    id
+    taskid
   }
 }
 

@@ -3,13 +3,34 @@
 function todos(state = [], action) {
 
 	switch (action.type) {
-		case 'ADD_TODO_SUCCESS':
+		case 'ADD_TODO_REQUEST':
 			return [...state, {
-				id: action.id,
+				id: 0,
+				taskID: action.taskid,
 				description: action.description,
 				importance: action.importance,
 				status: { completed: false }
 			}]
+
+		case 'ADD_TODO_SUCCESS':
+			return state.map((todo) => {
+
+				if(todo.taskID === action.taskid && todo.taskID){
+					
+					return Object.assign({}, todo, {
+						id: action.id
+					})
+				}
+				return todo
+			})
+			
+		case 'ADD_TODO_FAILURE':
+			return state.map((todo)=>{
+				if(todo.taskID === action.taskid && todo.taskID){
+				
+				}
+				return todo
+			})
 
 // Updating a ToDo Description
 		case 'UPDATE_TODO_DESCRIPTION_REQUEST':
@@ -95,6 +116,7 @@ function todos(state = [], action) {
 			return state.concat(action.todos.map((todo)=>{
 				return {
 					id: parseInt(todo.url.split('/')[4]),
+					taskID: todo.taskID,
 					description: todo.taskDescription,
 					importance: todo.taskImportance,
 					status: { completed: todo.taskCompleted }
