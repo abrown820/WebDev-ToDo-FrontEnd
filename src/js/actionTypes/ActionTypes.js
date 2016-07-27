@@ -10,9 +10,6 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 // Login Invalid Credentials
 export const LOGIN_BAD_REQUEST = 'LOGIN_BAD_REQUEST'
 
-// Bad Permissions error (token expired etc)
-export const ACTION_BAD_PERMISSIONS = 'ACTION_BAD_PERMISSIONS'
-
 // Register
 export const REGISTER = 'REGISTER'
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS'

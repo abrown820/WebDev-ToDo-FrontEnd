@@ -1,6 +1,6 @@
 import * as types from '../actionTypes/ActionTypes';
 import * as storage from '../actions/storageCheck';
-import { actionBadPermissions, newErrorWithTimeout } from './ErrorActions'
+import { handleErr, newErrorWithTimeout } from './ErrorActions'
 import { push } from 'react-router-redux'
 // helper function to handle errors for all async api calls.
 function handleErr(response){
@@ -29,9 +29,6 @@ export function asyncrequestToDos(){
       dispatch(requestToDosSuccess(json))
     })
     .catch(function(error){
-      if (error.message == 401){
-        dispatch(newErrorWithTimeout('request todos', 'your access token has expired - please log in again.'))
-      }
       dispatch(requestToDosFailure())
     })
   }
@@ -88,14 +85,13 @@ export function asyncaddToDo(description, importance) {
     .catch(function(error){
       if (error.message == 401){
         dispatch(newErrorWithTimeout('add todo', 'your token has expired, please log in again.'))
-        //dispatch(actionBadPermissions())
         dispatch(push('/'))
       }
       dispatch(addToDoFailure(taskid))
       dispatch(newErrorWithTimeout('add todo', `your task "${description}" failed to send`))
     })
-    
-    
+
+
   }
 }
 
@@ -111,7 +107,7 @@ export function addToDoRequest(description, importance, taskid) {
 }
 
 export function addToDoSuccess(id, taskid, description,importance){
-  
+
   return {
     type: types.ADD_TODO_SUCCESS,
     id,
