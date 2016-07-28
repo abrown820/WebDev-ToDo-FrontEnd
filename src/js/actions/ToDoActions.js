@@ -1,14 +1,19 @@
 import * as types from '../actionTypes/ActionTypes';
 import * as storage from '../actions/storageCheck';
-import { handleErr, newErrorWithTimeout } from './ErrorActions'
+import { newErrorWithTimeout } from './ErrorActions'
+import { browserHistory } from 'react-router'
 import { push } from 'react-router-redux'
+
 // helper function to handle errors for all async api calls.
 function handleErr(response){
   if (!response.ok){
-    console.log(response);
-    throw Error(response.status);
+    if (response.status == 401){
+      dispatch(newErrorWithTimeout('last action', 'token invalid'))
+      browserHistory.push('/')
+  	}
+    throw Error(response.status)
   }
-  return response;
+  return response
 }
 
 // Request Todos Actions
@@ -83,10 +88,6 @@ export function asyncaddToDo(description, importance) {
       dispatch(addToDoSuccess(id, taskid,description, importance))
       })
     .catch(function(error){
-      if (error.message == 401){
-        dispatch(newErrorWithTimeout('add todo', 'your token has expired, please log in again.'))
-        dispatch(push('/'))
-      }
       dispatch(addToDoFailure(taskid))
       dispatch(newErrorWithTimeout('add todo', `your task "${description}" failed to send`))
     })

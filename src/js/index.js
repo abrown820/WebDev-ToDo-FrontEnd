@@ -15,11 +15,10 @@ import toDoAppReducer from './reducers/Reducers'
 import { browserHistory, Router, Route, Link } from 'react-router';
 import { syncHistoryWithStore, routerReducer, push, routerMiddleware} from 'react-router-redux'
 
-// Configure saga middleware and store
-// const sagaMiddleware = createSagaMiddleware()
+// configure store
 const store = createStore(combineReducers({toDoAppReducer,
   routing: routerReducer}),
-  compose(applyMiddleware(thunk,routerMiddleware(browserHistory)), window.devToolsExtension ?
+  compose(applyMiddleware(thunk, routerMiddleware(browserHistory)), window.devToolsExtension ?
   window.devToolsExtension() : f => f))
 
   const history = syncHistoryWithStore(browserHistory, store);
