@@ -3,6 +3,7 @@ import * as actions from '../actionTypes/ActionTypes'
 let errorId = 0
 
 export function newError(id, errorAction, description){
+ 
   return {
     type: actions.NEW_ERROR,
     id,
@@ -18,15 +19,17 @@ export function dismissError(id){
   }
 }
 
-export function newErrorWithTimeout(errorAction, description){
-  const id = errorId++
+export function newErrorWithTimeout(errorAction, description){ 
+  let id = errorId++
 
   return (dispatch) => {
+    
     dispatch(newError(id, errorAction, description))
-
+    
     setTimeout(() => {
       dispatch(dismissError(id))
     }, 5000)
+
   }
 }
 
