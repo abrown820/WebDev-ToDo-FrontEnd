@@ -13,7 +13,7 @@ function handleErr(response,dispatch){
       browserHistory.push('/');
       dispatch((newErrorWithTimeout('last action', 'token invalid')))
       
-  	}
+    }
     throw Error(response.status)
   }
   return response
@@ -140,7 +140,7 @@ export function asyncdeleteToDo(id){
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/'+id+'/', {method:"DELETE", headers: myHeaders,mode:'cors'})
     
     .then((response)=>{
-      dispatch(handleErr(response, dispatch));
+      handleErr(response, dispatch);
       dispatch(deleteToDoSuccess(id));
     })
     .catch(function(error){
@@ -183,7 +183,7 @@ export function asynctoggleToDo(id, completed){
     return fetch('https://daniel-todo-backend.herokuapp.com/tasks/'+id+'/', {method:"PATCH", headers: myHeaders, body: JSON.stringify(todoContent),mode:'cors'})
     
     .then((response)=>{
-      dispatch(handleErr(response, dispatch));
+      handleErr(response, dispatch);
       dispatch(toggleToDoSuccess(id));
     })
     .catch(function(error){
@@ -220,31 +220,31 @@ export function toggleToDoFailure(id) {
 }
 
 export function asyncUpdateTodoDescription(id, newDescription) {
-	return function(dispatch) {
-		var taskDescription = {
-			'taskDescription': newDescription
-		}
-		const myHeaders = new Headers({
-			"Content-Type": "application/json",
-			"Authorization": storage.checkLogin()
-		})
-		return fetch('https://daniel-todo-backend.herokuapp.com/tasks/' + id + '/', {
-				method: "PATCH",
-				headers: myHeaders,
-				body: JSON.stringify(taskDescription),
-				mode: 'cors'
-			})
-			
-			.then(() => {
+  return function(dispatch) {
+    var taskDescription = {
+      'taskDescription': newDescription
+    }
+    const myHeaders = new Headers({
+      "Content-Type": "application/json",
+      "Authorization": storage.checkLogin()
+    })
+    return fetch('https://daniel-todo-backend.herokuapp.com/tasks/' + id + '/', {
+        method: "PATCH",
+        headers: myHeaders,
+        body: JSON.stringify(taskDescription),
+        mode: 'cors'
+      })
+      
+      .then(() => {
         dispatch(handleErr(response, dispatch));
         dispatch(updateTodoDescriptionSuccess(id, newDescription))
       })
-			.catch(function(error) {
-				dispatch(updateTodoDescriptionFailure(id))
+      .catch(function(error) {
+        dispatch(updateTodoDescriptionFailure(id))
         dispatch(newErrorWithTimeout('updating task description', 'the server did not register the update description.'))
         dispatch(asyncrequestToDos())
-			})
-	}
+      })
+  }
 }
 
 export function updateTodoDescription(id, newDescription){
