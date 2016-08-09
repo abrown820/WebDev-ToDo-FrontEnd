@@ -31,7 +31,7 @@ const sassLoaders = [
 module.exports = {
   env : process.env.NODE_ENV,
   entry: {
-    app: path.resolve(PATHS.app, 'index.js'),
+    app: ['babel-polyfill', 'whatwg-fetch', path.resolve(PATHS.app, 'index.js')],
     vendor: ['react']
   },
   output: {
@@ -85,6 +85,7 @@ module.exports = {
       browsers: ['last 2 versions']
     })];
   },
+
   devServer: {
     contentBase: path.resolve(__dirname, '../src'),
     port: 3000,

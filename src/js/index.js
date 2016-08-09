@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import TodoApp from './components/TodoApp'
 import LoginPage from './components/LoginPage'
 
+
 require("../styles/styles.scss");
 // import store, reducer and apply middleware
 import {createStore, applyMiddleware, compose, combineReducers} from 'redux'
