@@ -1,24 +1,30 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { addToDo } from '../actions/ToDoActions'
+import { asyncaddToDo } from '../actions/ToDoActions'
 
 let AddToDo = ({ dispatch }) => {
   let input
 
   return (
     <div>
-      <form onSubmit={e => {
+      <form className="task-form" onSubmit={e => {
         e.preventDefault()
         if (!input.value.trim()) {
           return
         }
-        dispatch(addToDo(input.value))
+        dispatch(asyncaddToDo(input.value, parseInt(document.getElementById('importanceSelect').value)))
         input.value = ''
       }}>
-        <input ref={node => {
+
+        <input className="task-input" placeholder="Write your task here..." ref={node => {
           input = node
         }} />
-        <button type="submit">
+        <select className="task-select" id='importanceSelect'>
+          <option value='1'>Normal</option>
+          <option value='2'>Important</option>
+          <option value='3'>Very Important</option>
+        </select>
+        <button className="task-submit" type="submit">
           Add Todo
         </button>
       </form>

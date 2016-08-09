@@ -1,6 +1,14 @@
 import { connect } from 'react-redux'
-import { toggleToDo, deleteToDo } from '../actions/ToDoActions.js'
+import {
+  asynctoggleToDo,
+  asyncdeleteToDo,
+  asyncrequestToDos,
+  asyncUpdateTodoDescription,
+  updateTodoDescription
+  } from '../actions/ToDoActions.js'
 import TodoList from '../components/TodoList'
+
+
 
 const getVisibleTodos = (todos, filter) => {
   switch (filter) {
@@ -15,17 +23,27 @@ const getVisibleTodos = (todos, filter) => {
 
 const mapStateToProps = (state) => {
   return {
-    todos: getVisibleTodos(state.todos, state.visibilityFilter)
+    visibleTodos: getVisibleTodos(state.toDoAppReducer.todos, state.toDoAppReducer.visibilityFilter),
+    todos: state.toDoAppReducer.todos
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onMarkComplete: (id) => {
-      dispatch(toggleToDo(id))
+    onMarkComplete: (id,completed) => {
+      dispatch(asynctoggleToDo(id,completed))
     },
     onDeleteTodo: (id) => {
-      dispatch(deleteToDo(id))
+      dispatch(asyncdeleteToDo(id))
+    },
+    getInitialTodos: () => {
+      dispatch(asyncrequestToDos())
+    },
+    asyncUpdateTodo: (id, newDescription) => {
+      dispatch(asyncUpdateTodoDescription(id, newDescription))
+    },
+    updateTodo: (id, newDescription) => {
+      dispatch(updateTodoDescription(id, newDescription))
     }
   }
 }
@@ -34,5 +52,6 @@ const VisibleTodoList = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TodoList)
+
 
 export default VisibleTodoList

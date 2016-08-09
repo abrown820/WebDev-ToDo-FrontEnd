@@ -31,7 +31,7 @@ const sassLoaders = [
 module.exports = {
   env : process.env.NODE_ENV,
   entry: {
-    app: path.resolve(PATHS.app, 'index.js'),
+    app: ['babel-polyfill', 'whatwg-fetch', path.resolve(PATHS.app, 'index.js')],
     vendor: ['react']
   },
   output: {
@@ -50,13 +50,23 @@ module.exports = {
   module: {
     loaders: [
       {
+        test: /\.js$/,
+            loader: "babel-loader",
+            exclude: /(node_modules)/,
+            query: {
+                presets: [ "es2015" ],
+                plugins: [ "transform-runtime" ]
+            }
+      },
+      {
         test: /\.jsx?$/,
         loaders: ['react-hot', 'babel'],
         include: PATHS.app
       },
       {
         test: /\.scss$/,
-        loader: sassLoaders.join('!')
+        loader: sassLoaders.join('!'),
+        include: PATHS.styles
       },
       {
         test: /\.css$/,
@@ -75,6 +85,7 @@ module.exports = {
       browsers: ['last 2 versions']
     })];
   },
+
   devServer: {
     contentBase: path.resolve(__dirname, '../src'),
     port: 3000,
